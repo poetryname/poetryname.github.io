@@ -2,32 +2,95 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8">
-    <title>Александр Баженов — поэзия</title>
+    <meta name="description" content="Авторский сайт поэта Александра Баженова. Стихи, проза, статьи, эссе.">
+    <title>Александр Баженов — поэзия, проза, статьи</title>
     <style>
       body {
         font-family: Georgia, serif;
         line-height: 1.7;
         color: #2c2c2c;
         max-width: 720px;
-        margin: 40px auto;
+        margin: 0 auto;
         padding: 0 16px;
       }
-      h1 {
-        text-align: center;
-        margin-bottom: 8px;
+
+      /* Шапка */
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        padding: 32px 0 24px 0;
       }
-      .subtitle {
+      .author-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #ccc;
+        flex-shrink: 0;
+      }
+      .photo-placeholder {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: #e0e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        color: #888;
         text-align: center;
-        font-size: 1rem;
+        flex-shrink: 0;
+        border: 3px solid #ccc;
+      }
+      .header-text h1 {
+        margin: 0 0 6px 0;
+        font-size: 1.6rem;
+      }
+      .header-text .bio {
+        font-size: 0.92rem;
         color: #555;
-        margin-top: 4px;
-        margin-bottom: 32px;
+        line-height: 1.5;
       }
-      h2 {
-        border-bottom: 1px solid #ccc;
-        padding-bottom: 10px;
-        margin-bottom: 24px;
+
+      /* Табы */
+      .tabs {
+        display: flex;
+        gap: 8px;
+        border-bottom: 2px solid #ddd;
+        margin: 0 0 28px 0;
+        padding: 0;
       }
+      .tab-button {
+        padding: 10px 20px;
+        font-family: Georgia, serif;
+        font-size: 1rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #888;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -2px;
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .tab-button:hover {
+        color: #444;
+      }
+      .tab-button.active {
+        color: #2c2c2c;
+        border-bottom-color: #5a5a5a;
+        font-weight: bold;
+      }
+
+      /* Содержимое табов */
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+
+      /* Стихи */
       .poem-block {
         background: #f7f7f9;
         padding: 22px;
@@ -42,20 +105,72 @@
       .poem-text {
         margin: 0;
       }
+
+      /* Кнопка "Читать дальше" */
+      .read-more-wrapper {
+        text-align: center;
+        margin: 0 0 40px 0;
+      }
+      .read-more-btn {
+        padding: 10px 28px;
+        font-family: Georgia, serif;
+        font-size: 1rem;
+        background: #f7f7f9;
+        border: 1px solid #bbb;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #444;
+        transition: background 0.2s;
+      }
+      .read-more-btn:hover {
+        background: #eee;
+      }
+
+      /* Заготовки (проза, статьи) */
+      .coming-soon {
+        text-align: center;
+        color: #999;
+        font-style: italic;
+        padding: 40px 0;
+      }
+
+      /* Подвал */
       footer {
         margin-top: 50px;
+        padding-top: 20px;
+        border-top: 1px solid #ddd;
         text-align: center;
         color: #777;
         font-size: 0.9rem;
+        padding-bottom: 30px;
       }
     </style>
   </head>
   <body>
-    <h1>Александр Баженов</h1>
-    <p class="subtitle">Поэзия • Проза • Эссе</p>
 
-    <section>
-      <h2>Стихи</h2>
+    <!-- ШАПКА: фото + биография -->
+    <div class="header">
+      <!-- Если фото уже загружено в репозиторий, замени блок ниже на:
+           <img src="photo.jpg" alt="Александр Баженов" class="author-photo">
+           Файл photo.jpg нужно положить рядом с index.html -->
+      <div class="photo-placeholder">Фото<br>скоро<br>будет</div>
+      <div class="header-text">
+        <h1>Александр Баженов</h1>
+        <p class="bio">
+          Поэт, прозаик, эссеист. Живёт и работает в Екатеринбурге.
+        </p>
+      </div>
+    </div>
+
+    <!-- ТАБЫ -->
+    <div class="tabs">
+      <button class="tab-button active" onclick="showTab('poems')">Стихи</button>
+      <button class="tab-button" onclick="showTab('prose')">Проза</button>
+      <button class="tab-button" onclick="showTab('articles')">Статьи</button>
+    </div>
+
+    <!-- ВКЛАДКА: СТИХИ -->
+    <div id="poems" class="tab-content active">
 
       <!-- Стих 1 -->
       <article class="poem-block">
@@ -134,7 +249,7 @@
           Я не найду там места<br>
           Для честных слов, покинувших свой кров.<br><br>
 
-          И побежит<br> 
+          И побежит<br>
           Одна слеза, другая,<br>
           Покуда я так многого не смог,<br>
           Насквозь прошит<br>
@@ -164,87 +279,245 @@
         </p>
       </article>
 
-      <!-- Стих 5 -->
-      <article class="poem-block">
-        <h3 class="poem-title">Какое там великолепье</h3>
-        <p class="poem-text">
-          Какое там великолепье,<br>
-          Когда б не хлопнул крышкой гроб<br>
-          Над жизнью, вышедшей в бесхлебье<br>
-          Одной из выпавших ей троп…<br><br>
+      <!-- Кнопка "Читать дальше" -->
+      <div class="read-more-wrapper">
+        <button class="read-more-btn" onclick="togglePoems()">Читать дальше →</button>
+      </div>
 
-          Когда ползу пустым трамваем<br> 
-          До нужных мне координат,<br>
-          На части речи разрываем<br> 
-          И закольцован в циферблат…<br><br>
+      <!-- Остальные стихи (скрыты до нажатия) -->
+      <div id="more-poems" style="display:none;">
 
-          Когда охота вон из поля<br>
-          Чужого зренья убежав,<br>
-          В юдоли вырваться — на волю,<br>
-          На ветер бросив старый шарф…<br><br>
+        <!-- Стих 5 -->
+        <article class="poem-block">
+          <h3 class="poem-title">Какое там великолепье</h3>
+          <p class="poem-text">
+            Какое там великолепье,<br>
+            Когда б не хлопнул крышкой гроб<br>
+            Над жизнью, вышедшей в бесхлебье<br>
+            Одной из выпавших ей троп…<br><br>
 
-          Охота скинуть все скорлупы,<br>
-          Доспехи из «Железных снов»,<br>
-          Системы кровеносной трубы<br>
-          С души, зажатой в формах слов.<br><br> 
+            Когда ползу пустым трамваем<br>
+            До нужных мне координат,<br>
+            На части речи разрываем<br>
+            И закольцован в циферблат…<br><br>
 
-          Охота спать, сказав: «Не к спеху<br> 
-          Мне в рот ржавеющих ворот<br> 
-          Идти куда-то, веря эху<br> 
-          Тревог, рождённых из невзгод…»<br><br>
+            Когда охота вон из поля<br>
+            Чужого зренья убежав,<br>
+            В юдоли вырваться — на волю,<br>
+            На ветер бросив старый шарф…<br><br>
 
-          Охота выпасть в пасть пространства,<br> 
-          Что смотрит сверху, с высоты,<br>
-          В то неземное постоянство,<br> 
-          С которым мы уже на «ты».
-        </p>
-      </article>
+            Охота скинуть все скорлупы,<br>
+            Доспехи из «Железных снов»,<br>
+            Системы кровеносной трубы<br>
+            С души, зажатой в формах слов.<br><br>
 
-      <!-- Стих 6 -->
-      <article class="poem-block">
-        <h3 class="poem-title">«Не всякое лыко в строку»</h3>
-        <p class="poem-text">
-          «Не всякое лыко в строку», –<br>
-          Сказав сам себе, отпускаю<br> 
-          Всё то, что сберечь не могу,<br>
-          Всё то, что на сердце таскаю.<br><br> 
+            Охота спать, сказав: «Не к спеху<br>
+            Мне в рот ржавеющих ворот<br>
+            Идти куда-то, веря эху<br>
+            Тревог, рождённых из невзгод…»<br><br>
 
-          Но мысль изречённая – ложь,<br>
-          В жилище, что стало гробницей<br>
-          Всего, с чем бессилен я всё ж<br> 
-          Смириться, сразиться, проститься.
-        </p>
-      </article>
+            Охота выпасть в пасть пространства,<br>
+            Что смотрит сверху, с высоты,<br>
+            В то неземное постоянство,<br>
+            С которым мы уже на «ты».
+          </p>
+        </article>
 
-      <!-- Стих 7 -->
-      <article class="poem-block">
-        <h3 class="poem-title">Строка устала от скитанья</h3>
-        <p class="poem-text">
-          Строка устала от скитанья,<br>
-          Наверняка слегка пока,<br>
-          В морских глубинах созерцанья<br>
-          Ладеек ваших, облака…<br><br>
+        <!-- Стих 6 -->
+        <article class="poem-block">
+          <h3 class="poem-title">«Не всякое лыко в строку»</h3>
+          <p class="poem-text">
+            «Не всякое лыко в строку», –<br>
+            Сказав сам себе, отпускаю<br>
+            Всё то, что сберечь не могу,<br>
+            Всё то, что на сердце таскаю.<br><br>
 
-          Куда плывёте? К изголовью<br> 
-          Того, кто скинул цепи все,<br>
-          Оставил и ярмо воловье,<br>
-          И спешку белки в колесе…<br><br> 
+            Но мысль изречённая – ложь,<br>
+            В жилище, что стало гробницей<br>
+            Всего, с чем бессилен я всё ж<br>
+            Смириться, сразиться, проститься.
+          </p>
+        </article>
 
-          Он улыбнулся, ставши ветром,<br>
-          Вернулся на круги своя,<br>
-          Что мерят не квадратным метром —<br>
-          Длинною песни воробья.<br><br> 
+        <!-- Стих 7 -->
+        <article class="poem-block">
+          <h3 class="poem-title">Строка устала от скитанья</h3>
+          <p class="poem-text">
+            Строка устала от скитанья,<br>
+            Наверняка слегка пока,<br>
+            В морских глубинах созерцанья<br>
+            Ладеек ваших, облака…<br><br>
 
-          И ни пера ему, ни пуха —<br>
-          Молчать в шуршании листвы<br>
-          И, как земля, быть полным слуха,<br>
-          В покое, полном синевы.
-        </p>
-      </article>
-    </section>
+            Куда плывёте? К изголовью<br>
+            Того, кто скинул цепи все,<br>
+            Оставил и ярмо воловье,<br>
+            И спешку белки в колесе…<br><br>
+
+            Он улыбнулся, ставши ветром,<br>
+            Вернулся на круги своя,<br>
+            Что мерят не квадратным метром —<br>
+            Длинною песни воробья.<br><br>
+
+            И ни пера ему, ни пуха —<br>
+            Молчать в шуршании листвы<br>
+            И, как земля, быть полным слуха,<br>
+            В покое, полном синевы.
+          </p>
+        </article>
+
+        <!-- Стих 8 -->
+        <article class="poem-block">
+          <h3 class="poem-title">Я обращаю взоры к Богу</h3>
+          <p class="poem-text">
+            Я обращаю взоры к Богу,<br>
+            Но он чуть дальше от меня,<br>
+            Чем в преисподнюю дорога,<br>
+            Что излизал язык огня…<br><br>
+
+            Когда паденье неизбежно,<br>
+            Прошу: «Десницу протяни<br>
+            И уложи в страницы нежно<br>
+            Бездарно прожитые дни».<br><br>
+
+            На молодые ставлю дрожжи<br>
+            Свой дух, что рвётся в небеса,<br>
+            К цветам рассвета, вон из кожи,<br>
+            Чтоб заглянуть в его глаза.<br><br>
+
+            Но, видимо, не тот я витязь,<br>
+            Что страх способен превозмочь,<br>
+            С Горынычем в дремоте видясь,<br>
+            В кровавой бане парясь в ночь.<br><br>
+
+            Иллюзий рушатся постройки,<br>
+            Смывает их вода времён,<br>
+            Но слышу я не грохот бойкий —<br>
+            Малиновый вечерний звон:<br><br>
+
+            «Осталось лишь поверить Богу,<br>
+            Почуяв небо за версту,<br>
+            Тому, что путь и есть дорога<br>
+            Через распятье ко Христу».
+          </p>
+        </article>
+
+        <!-- Стих 9 -->
+        <article class="poem-block">
+          <h3 class="poem-title">Не сея ветер, бурю не пожну</h3>
+          <p class="poem-text">
+            Не сея ветер, бурю не пожну<br>
+            И выплачу долги, а не глаза,<br>
+            В купели Силоамской утону,<br>
+            Но выплыву на алых парусах.<br><br>
+
+            Хорошими намереньями в ад<br>
+            Не вымощу дорогу и в строю<br>
+            Не буду я, как доблестный солдат,<br>
+            Маршировать у бездны на краю.<br><br>
+
+            Не соберусь назад, не оглянусь —<br>
+            Там обо мне минувшее скорбит:<br>
+            Царевна-Лебедь и Святая Русь,<br>
+            Любовный ялик, что о быт разбит…
+          </p>
+        </article>
+
+        <!-- Стих 10 -->
+        <article class="poem-block">
+          <h3 class="poem-title">Ни голод Гамсуна, ни тошнота Жан Поля</h3>
+          <p class="poem-text">
+            Ни голод Гамсуна, ни тошнота Жан Поля,<br>
+            Ни скрипка Цанна, ни звучанье сфер,<br>
+            Ни крепость градуса, а пик духовной боли<br>
+            Меня ведёт холодной ночью в сквер.<br><br>
+
+            Я там брожу один и в полный голос<br>
+            Молчу, ищу себя в районе двух<br>
+            Часов и понимаю, что мой дух<br>
+            Не от Земли — с другого поля колос…
+          </p>
+        </article>
+
+        <!-- Стих 11 -->
+        <article class="poem-block">
+          <h3 class="poem-title">Мы долго просидели, но быстро поседели</h3>
+          <p class="poem-text">
+            Мы долго просидели, но быстро поседели.<br>
+            Смотрели из окошка на метели,<br>
+            Бросали якоря, бывали на мели,<br>
+            Тонули, вылезали из петли.<br><br>
+
+            Не зная броду, часто лезли в воду,<br>
+            У моря ждали ясную погоду,<br>
+            Не верили, что может задушить<br>
+            Та жаба, что мешает просто жить.<br><br>
+
+            Да, было дело, помню, кровь кипела,<br>
+            Но отзвенело «Кар» вороны белой,<br>
+            Слетело облако с черёмухи легко<br>
+            И на стекло озёрное легло.<br><br>
+
+            Я, помню всё, шепчу: «Спасибо Богу.<br>
+            Всего я взял от жизни понемногу…»
+          </p>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ВКЛАДКА: ПРОЗА -->
+    <div id="prose" class="tab-content">
+      <div class="coming-soon">
+        Раздел «Проза» скоро будет открыт.<br>
+        Здесь появятся рассказы, миниатюры и очерки.
+      </div>
+    </div>
+
+    <!-- ВКЛАДКА: СТАТЬИ -->
+    <div id="articles" class="tab-content">
+      <div class="coming-soon">
+        Раздел «Статьи» скоро будет открыт.<br>
+        Здесь появятся эссе, литературная критика и публицистика.
+      </div>
+    </div>
 
     <footer>
       &copy; 2024 Александр Баженов. Все права защищены.
     </footer>
+
+    <script>
+      function showTab(tabName) {
+        var contents = document.getElementsByClassName('tab-content');
+        for (var i = 0; i < contents.length; i++) {
+          contents[i].classList.remove('active');
+        }
+        var buttons = document.getElementsByClassName('tab-button');
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].classList.remove('active');
+        }
+        document.getElementById(tabName).classList.add('active');
+        var tabLabels = { poems: 'Стихи', prose: 'Проза', articles: 'Статьи' };
+        var label = tabLabels[tabName];
+        for (var i = 0; i < buttons.length; i++) {
+          if (buttons[i].textContent === label) {
+            buttons[i].classList.add('active');
+            break;
+          }
+        }
+      }
+
+      function togglePoems() {
+        var morePoems = document.getElementById('more-poems');
+        var btn = document.querySelector('.read-more-btn');
+        if (morePoems.style.display === 'none') {
+          morePoems.style.display = 'block';
+          btn.textContent = '↑ Свернуть';
+        } else {
+          morePoems.style.display = 'none';
+          btn.textContent = 'Читать дальше →';
+        }
+      }
+    </script>
+
   </body>
 </html>

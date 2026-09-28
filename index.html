@@ -1,529 +1,383 @@
+
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <meta name="description" content="Авторский сайт поэта Александра Баженова. Стихи, проза, статьи, эссе.">
-    <title>Александр Баженов — поэзия, проза, статьи</title>
-    <style>
-      body {
-        font-family: Georgia, serif;
-        line-height: 1.7;
-        color: #2c2c2c;
-        max-width: 720px;
-        margin: 0 auto;
-        padding: 0 16px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <title>Литературный сайт</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #f9f9f7;
+      margin: 0;
+      padding: 0 16px;
+    }
+    header {
+      text-align: center;
+      padding: 30px 0;
+    }
+    h1 { margin: 0; font-size: 2.2rem; }
+    nav {
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .tab-btn {
+      padding: 10px 16px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .tab-btn:hover { background: #eee; }
+    .tab-btn.active {
+      background: #2c3e50;
+      color: white;
+      border-color: #2c3e50;
+    }
+    main { padding: 24px 0; }
+    .section-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .section-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .poem-block {
+      max-width: 700px;
+      margin: 32px auto;
+      padding: 20px;
+      background: white;
+      border-left: 4px solid #8b4513;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .photo-area {
+      text-align: center;
+      margin: 32px 0;
+    }
+    .photo-area img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: #777;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Литературный уголок</h1>
+  </header>
 
-      /* Шапка */
-      .header {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-        padding: 32px 0 24px 0;
-      }
-      .author-photo {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid #ccc;
-        flex-shrink: 0;
-      }
-      .photo-placeholder {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background: #e0e0e0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.8rem;
-        color: #888;
-        text-align: center;
-        flex-shrink: 0;
-        border: 3px solid #ccc;
-      }
-      .header-text h1 {
-        margin: 0 0 6px 0;
-        font-size: 1.6rem;
-      }
-      .header-text .bio {
-        font-size: 0.92rem;
-        color: #555;
-        line-height: 1.5;
-      }
+  <nav>
+    <div class="tabs">
+      <button class="tab-btn active" data-target="poetry">Стихи</button>
+      <button class="tab-btn" data-target="prose">Проза</button>
+      <button class="tab-btn" data-target="articles">Статьи</button>
+      <button class="tab-btn" data-target="essays">Эссе</button>
+      <button class="tab-btn" data-target="sketches">Очерки</button>
+      <button class="tab-btn" data-target="photo">Фотоальбом</button>
+      <button class="tab-btn" data-target="library">Библиотека публикаций</button>
+    </div>
+  </nav>
 
-      /* Табы */
-      .tabs {
-        display: flex;
-        gap: 8px;
-        border-bottom: 2px solid #ddd;
-        margin: 0 0 28px 0;
-        padding: 0;
-      }
-      .tab-button {
-        padding: 10px 20px;
-        font-family: Georgia, serif;
-        font-size: 1rem;
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: #888;
-        border-bottom: 3px solid transparent;
-        margin-bottom: -2px;
-        transition: color 0.2s, border-color 0.2s;
-      }
-      .tab-button:hover {
-        color: #444;
-      }
-      .tab-button.active {
-        color: #2c2c2c;
-        border-bottom-color: #5a5a5a;
-        font-weight: bold;
-      }
-
-      /* Содержимое табов */
-      .tab-content {
-        display: none;
-      }
-      .tab-content.active {
-        display: block;
-      }
-
-      /* Стихи */
-      .poem-block {
-        background: #f7f7f9;
-        padding: 22px;
-        border-left: 5px solid #5a5a5a;
-        margin-bottom: 40px;
-      }
-      .poem-title {
-        margin: 0 0 14px 0;
-        font-size: 1.15rem;
-        color: #333;
-      }
-      .poem-text {
-        margin: 0;
-      }
-
-      /* Кнопка "Читать дальше" */
-      .tabs {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-bottom: 2px solid #ddd;
-  margin: 0 0 28px 0;
-  padding: 0;
-}
-
-.inline-btn {
-  margin-bottom: 0 !important;
-  font-size: 0.95rem;
-}
-      .read-more-btn {
-        padding: 10px 28px;
-        font-family: Georgia, serif;
-        font-size: 1rem;
-        background: #f7f7f9;
-        border: 1px solid #bbb;
-        border-radius: 4px;
-        cursor: pointer;
-        color: #444;
-        transition: background 0.2s;
-      }
-      .read-more-btn:hover {
-        background: #eee;
-      }
-
-      /* Заготовки (проза, статьи) */
-      .coming-soon {
-        text-align: center;
-        color: #999;
-        font-style: italic;
-        padding: 40px 0;
-      }
-
-      /* Подвал */
-      footer {
-        margin-top: 50px;
-        padding-top: 20px;
-        border-top: 1px solid #ddd;
-        text-align: center;
-        color: #777;
-        font-size: 0.9rem;
-        padding-bottom: 30px;
-      }
-    </style>
-  </head>
-  <body>
-
-    <!-- ШАПКА: фото + биография -->
-    <div class="header">
-      <!-- Если фото уже загружено в репозиторий, замени блок ниже на:
-           <img src="photo.jpg" alt="Александр Баженов" class="author-photo">
-           Файл photo.jpg нужно положить рядом с index.html -->
-      <div class="photo-placeholder">Фото<br>скоро<br>будет</div>
-      <div class="header-text">
-        <h1>Александр Баженов</h1>
-        <p class="bio">
-          Поэт, прозаик, эссеист. Живёт и работает в Екатеринбурге.
+  <main>
+    <!-- Стихи -->
+    <div id="poetry" class="section-content active">
+      <!-- Стих 1 -->
+      <div class="poem-block">
+        <p>
+          В последнее время в порядке вещей<br>
+          Пределы разумного я размываю,<br>
+          И чёрные очи безлунных ночей<br>
+          Открыв, я свои до утра закрываю...<br>
+          Во сны захожу— за межу — и гляжу<br>
+          Туда, где в начале затеплилось слово<br>
+          На Божьих устах. Просыпаюсь, пишу,<br>
+          Пытаясь сказать его снова и снова...
         </p>
       </div>
-    </div>
 
-    <!-- ТАБЫ -->
-    <div class="tabs">
-      <button class="tab-button active" onclick="showTab('poems')">Стихи</button>
-      <button class="tab-button" onclick="showTab('prose')">Проза</button>
-      <button class="tab-button" onclick="showTab('articles')">Статьи</button>
-    </div>
+      <!-- Стих 2 -->
+      <div class="poem-block">
+        <p>
+          Проходит время, рушатся миры.<br>
+          И мы уже не те, что были в плане<br>
+          Большой и нескончаемой игры<br>
+          Мальков и их съедающих пираний,<br>
+          Овец и их съедающих волков,<br>
+          Жучков и их съедающих пернатых,<br>
+          Костров и к ним летящих мотыльков,<br>
+          Тиранов и распятых…<br>
+          Циничный мир, увы, не поменять,<br>
+          И чей-то сын погиб на поле битвы,<br>
+          И у икон его рыдает мать,<br>
+          Но слышно ли кому-нибудь молитвы?<br>
+          Возможно, справедливость — это миф,<br>
+          А мир стоит на трупах и обломках,<br>
+          Но я, не зная, где таится риф,<br>
+          Плыву по размышленью о потомках:<br>
+          Они обречены на жизнь в мирах,<br>
+          Пропитанных жестокостью морозной,<br>
+          Где снег орнаментальный — чей-то прах,<br>
+          Где залит фон рябиною венозной.
+        </p>
+      </div>
 
-    <!-- ВКЛАДКА: СТИХИ -->
-    <div id="poems" class="tab-content active">
+      <!-- Стих 3 -->
+      <div class="poem-block">
+        <p>
+          Вернётся бумеранг за камни в огороде<br>
+          Ко всем разжёгшим ненависть без дров,<br>
+          И осень на прекрасной этой ноте<br>
+          Себя раскроет розою ветров…<br>
+          И я пойду в свой лес, как говорится,<br>
+          Ведь сколько волка с рук ни угощай,<br>
+          Он всё-таки свободной воли птица<br>
+          В овечьей шкуре. Так прости-прощай…<br>
+          Дурная голова не даст ногам покоя,<br>
+          Хоть, засучив до локтя рукава,<br>
+          Кисельным берегом с молочною рекою<br>
+          Иду в свои слова…
+        </p>
+      </div>
 
-      <!-- Стих 1 -->
-      <article class="poem-block">
-        <h3 class="poem-title">Дышать тайгой, гулять речною поймой</h3>
-        <p class="poem-text">
+      <!-- Стих 4 -->
+      <div class="poem-block">
+        <p>
           Дышать тайгой, гулять речною поймой,<br>
           Не думая о том, что не дано<br>
           Войти в литературную обойму —<br>
-          Так хорошо, что даже всё равно…<br><br>
-
+          Так хорошо, что даже всё равно…<br>
           Восстанет из развалин Карфагена<br>
           Во мне упрёк судилищу Фемид,<br>
           Но, злую маску скинув, не надену,<br>
-          И всё в душе моей переболит…<br><br>
-
-          А судьи кто? А горе от ума ли?<br>
-          Я, даже ставший ниже трын-травы,<br>
-          Забыв, что время ходит по спирали,<br>
-          Вовек не снёс бы грешной головы...<br><br>
-
-          А так терпимо: без году неделя<br>
-          Всему, с чем примирился наперёд —<br>
-          С эмалью той, что мыслима в апреле,<br>
-          И той, что проржавеет через год.<br><br>
-
-          И с тем, что в баре, в офисе, на стройке<br>
-          Работал бы, но не моё, увы, —<br>
-          Не позволяют сбитые настройки<br>
-          В непостижимых недрах головы.<br><br>
-
-          Я ухожу в писательский свой угол,<br>
+          И всё в душе моей переболит…<br>
+          Отправлюсь подрабатывать на стройке<br>
+          И становиться ниже трын-травы,<br>
+          Но не позволят сбитые настройки<br>
+          В непостижимых недрах головы…<br>
+          И я вернусь в писательский свой угол,<br>
           Где волны бьются лбами о суда,<br>
           Где вызревает ствол древесный в уголь,<br>
           Где ждут поэты Страшного суда.
         </p>
-      </article>
-
-      <!-- Стих 2 -->
-      <article class="poem-block">
-        <h3 class="poem-title">Светились в ряд фонарные огни</h3>
-        <p class="poem-text">
-          Светились в ряд фонарные огни<br>
-          В пушистых безднах снежного тумана.<br>
-          Мой херувим, слезу не урони —<br>
-          Я говорил — по мне ведь плакать рано…<br><br>
-
-          Не верил я в ловушки порч и проч.<br>
-          Но вдруг душа отклеилась от тела…<br>
-          Я слишком долго вглядывался в ночь,<br>
-          Пока она в меня не посмотрела.
-        </p>
-      </article>
-
-      <!-- Стих 3 -->
-      <article class="poem-block">
-        <h3 class="poem-title">В душе дыра</h3>
-        <p class="poem-text">
-          В душе дыра<br>
-          Размером в этот город,<br>
-          Где я нашёл тебя и потерял.<br>
-          Пришла пора,<br>
-          И стал яснее повод<br>
-          Отдать тебе всё то, что я украл:<br><br>
-
-          Возможно, день<br>
-          Со вкусом лёгких денег,<br>
-          А может быть, иллюзию высот,<br>
-          Где нашу тень<br>
-          Сметает солнца веник,<br>
-          Являя тьмы египетской излёт.<br><br>
-
-          Я знаю, да,<br>
-          Что выйду из подъезда,<br>
-          Нырну во мрак злопамятных дворов,<br>
-          Но никогда<br>
-          Я не найду там места<br>
-          Для честных слов, покинувших свой кров.<br><br>
-
-          И побежит<br>
-          Одна слеза, другая,<br>
-          Покуда я так многого не смог,<br>
-          Насквозь прошит<br>
-          Струною, дорогая,<br>
-          Которая дрожит — коснулся Бог…
-        </p>
-      </article>
-
-      <!-- Стих 4 -->
-      <article class="poem-block">
-        <h3 class="poem-title">Через меня пройдя навылет</h3>
-        <p class="poem-text">
-          Через меня пройдя навылет,<br>
-          Твой взгляд простёрся вопреки<br>
-          Всему тому, что время выльет<br>
-          В огонь, где гибнут мотыльки.<br><br>
-
-          Опали пылью бархатистой<br>
-          Крапивница и Махаон<br>
-          В глазницах полночи землистой,<br>
-          Как подобает испокон…<br><br>
-
-          Так я, почти дыша на ладан,<br>
-          Внезапно пойманный в прищур,<br>
-          Тобой прочитан и угадан<br>
-          До слёз, горячих чересчур.
-        </p>
-      </article>
-
-      <!-- Кнопка "Читать дальше" -->
-      <div class="read-more-wrapper">
-        <button class="read-more-btn" onclick="togglePoems()">Читать дальше →</button>
       </div>
 
-      <!-- Остальные стихи (скрыты до нажатия) -->
-      <div id="more-poems" style="display:none;">
+      <!-- Стих 5 -->
+      <div class="poem-block">
+        <p>
+          Не первую скрипку<br>
+          Играю я слепком<br>
+          Нахальной улыбки<br>
+          Под старою кепкой.<br>
+          По клеткам бумажным<br>
+          Гуляю привольно<br>
+          То Гоголем важным,<br>
+          То фертом довольным,<br>
+          Но нет во мне жилки<br>
+          Купецкой — продажной,<br>
+          И в шахматной вилке<br>
+          Я жертвую башней.
+        </p>
+      </div>
 
-        <!-- Стих 5 -->
-        <article class="poem-block">
-          <h3 class="poem-title">Какое там великолепье</h3>
-          <p class="poem-text">
-            Какое там великолепье,<br>
-            Когда б не хлопнул крышкой гроб<br>
-            Над жизнью, вышедшей в бесхлебье<br>
-            Одной из выпавших ей троп…<br><br>
+      <!-- Стих 6 -->
+      <div class="poem-block">
+        <p>
+          Так злых красот живые тени,<br>
+          В лучах сгорая, напоследок<br>
+          Садятся на скамью сирени<br>
+          Во снах набоковских нимфеток,<br>
+          Так «Роза мира» в розах ветра<br>
+          В саду с «Цветами зла», во взоре<br>
+          Слепца — открыла ночи недра,<br>
+          Где свет в тоннеле — капля в море;<br>
+          Так мрёт от жизни забулдыга<br>
+          На Растеряевой аллее,<br>
+          И гаснет в облаке гвоздика<br>
+          В саду, где мы вчера сидели…
+        </p>
+      </div>
 
-            Когда ползу пустым трамваем<br>
-            До нужных мне координат,<br>
-            На части речи разрываем<br>
-            И закольцован в циферблат…<br><br>
+      <!-- Стих 7 -->
+      <div class="poem-block">
+        <p>
+          Открыть тетрадь, писать навзрыд,<br>
+          Непринуждённым Пастернаком,<br>
+          И выйти за окрестный вид,<br>
+          Чтоб возвратиться твёрдым знаком.<br>
+          Сгореть, разбиться об заклад,<br>
+          Умыть свой сон в чернилах ночи,<br>
+          Где звезды в вечности блестят<br>
+          Сквозной грядою многоточий.
+        </p>
+      </div>
 
-            Когда охота вон из поля<br>
-            Чужого зренья убежав,<br>
-            В юдоли вырваться — на волю,<br>
-            На ветер бросив старый шарф…<br><br>
+      <!-- Стих 8 -->
+      <div class="poem-block">
+        <p>
+          Город, что гудит людскими ульями,<br>
+          Отразит во взгляде злая грусть,<br>
+          Что пустыми взглядами акульими<br>
+          Нас перечитает наизусть.<br>
+          Будни жадно ест многоголосица:<br>
+          Время — покреститься на восход —<br>
+          Терпит? Лечит? Или переносится?<br>
+          Или в переносицы нам бьёт?<br>
+          Помолчим, посыпав пеплом головы,<br>
+          В органы органа плотно влив<br>
+          Музыку отчаянья весёлого,<br>
+          Полного раскаянья мотив.
+        </p>
+      </div>
 
-            Охота скинуть все скорлупы,<br>
-            Доспехи из «Железных снов»,<br>
-            Системы кровеносной трубы<br>
-            С души, зажатой в формах слов.<br><br>
+      <!-- Стих 9 -->
+      <div class="poem-block">
+        <p>
+          Ответит лишь читатель: поэт я или нет,<br>
+          Сквозь ямб, хорей и дактиль смотрящий на рассвет.<br>
+          Пусть дышит время о́но сквозь каждый добрый стих,<br>
+          Моих мучений лоно, законы дней моих…<br>
+          Пускай мой стих, как вывих великой речи, но<br>
+          Он, грея выдох, вытек на стужи полотно…<br>
+          Пускай целуют губы красавиц не меня,<br>
+          Ведь жалить сердце — глупо бутонами огня.<br>
+          Огонь потухнет — знаю, и снова я спою,<br>
+          Вернусь обратно в стаю бродячую — свою,<br>
+          Где понял не по книжкам свободы колею<br>
+          С ценой большою слишком за пятницу в раю.<br>
+          Улыбка маски фальши, блестящей лести сок?<br>
+          Мне ближе то, что дальше, где дуло и висок.<br>
+          Там всё предельно ясно больному и врачу.<br>
+          Зарёй умывшись красной, кричу, молчу, лечу…
+        </p>
+      </div>
 
-            Охота спать, сказав: «Не к спеху<br>
-            Мне в рот ржавеющих ворот<br>
-            Идти куда-то, веря эху<br>
-            Тревог, рождённых из невзгод…»<br><br>
+      <!-- Стих 10 -->
+      <div class="poem-block">
+        <p>
+          Мы долго просидели, но быстро поседели.<br>
+          Смотрели из окошка на метели,<br>
+          Бросали якоря, бывали на мели,<br>
+          Тонули, вылезали из петли.<br>
+          Не зная броду, часто лезли в воду,<br>
+          У моря ждали ясную погоду,<br>
+          Не верили, что может задушить<br>
+          Та жаба, что мешает просто жить.<br>
+          Да, было дело, помню, кровь кипела,<br>
+          Но отзвенело «Кар» вороны белой,<br>
+          Слетело облако с черёмухи легко<br>
+          И на стекло озёрное легло.<br>
+          Я, помню всё, шепчу: «Спасибо Богу.<br>
+          Всего я взял от жизни понемногу…»
+        </p>
+      </div>
 
-            Охота выпасть в пасть пространства,<br>
-            Что смотрит сверху, с высоты,<br>
-            В то неземное постоянство,<br>
-            С которым мы уже на «ты».
-          </p>
-        </article>
+      <!-- Стих 11 -->
+      <div class="poem-block">
+        <p>
+          Трамвай звенит и движется в депо,<br>
+          Весна в ажуре розовой сирени<br>
+          Шагает в сон поэта прямо по<br>
+          Отброшенной закатом смертной тени.<br>
+          Сквозь май прозрачный смотришь ты в июнь,<br>
+          Забытый, странный, в прошлом многопьющий:<br>
+          Грядёт горячка белая, как лунь,<br>
+          Чтобы забрать себе твой сон грядущий…<br>
+          И горнов горних слышишь ты упрёк:<br>
+          Сирены скорых… Всё. Пора в больницу,<br>
+          Где крылья замотают в узелок,<br>
+          Где не поймут поющую жар-птицу.
+        </p>
+      </div>
 
-        <!-- Стих 6 -->
-        <article class="poem-block">
-          <h3 class="poem-title">«Не всякое лыко в строку»</h3>
-          <p class="poem-text">
-            «Не всякое лыко в строку», –<br>
-            Сказав сам себе, отпускаю<br>
-            Всё то, что сберечь не могу,<br>
-            Всё то, что на сердце таскаю.<br><br>
-
-            Но мысль изречённая – ложь,<br>
-            В жилище, что стало гробницей<br>
-            Всего, с чем бессилен я всё ж<br>
-            Смириться, сразиться, проститься.
-          </p>
-        </article>
-
-        <!-- Стих 7 -->
-        <article class="poem-block">
-          <h3 class="poem-title">Строка устала от скитанья</h3>
-          <p class="poem-text">
-            Строка устала от скитанья,<br>
-            Наверняка слегка пока,<br>
-            В морских глубинах созерцанья<br>
-            Ладеек ваших, облака…<br><br>
-
-            Куда плывёте? К изголовью<br>
-            Того, кто скинул цепи все,<br>
-            Оставил и ярмо воловье,<br>
-            И спешку белки в колесе…<br><br>
-
-            Он улыбнулся, ставши ветром,<br>
-            Вернулся на круги своя,<br>
-            Что мерят не квадратным метром —<br>
-            Длинною песни воробья.<br><br>
-
-            И ни пера ему, ни пуха —<br>
-            Молчать в шуршании листвы<br>
-            И, как земля, быть полным слуха,<br>
-            В покое, полном синевы.
-          </p>
-        </article>
-
-        <!-- Стих 8 -->
-        <article class="poem-block">
-          <h3 class="poem-title">Я обращаю взоры к Богу</h3>
-          <p class="poem-text">
-            Я обращаю взоры к Богу,<br>
-            Но он чуть дальше от меня,<br>
-            Чем в преисподнюю дорога,<br>
-            Что излизал язык огня…<br><br>
-
-            Когда паденье неизбежно,<br>
-            Прошу: «Десницу протяни<br>
-            И уложи в страницы нежно<br>
-            Бездарно прожитые дни».<br><br>
-
-            На молодые ставлю дрожжи<br>
-            Свой дух, что рвётся в небеса,<br>
-            К цветам рассвета, вон из кожи,<br>
-            Чтоб заглянуть в его глаза.<br><br>
-
-            Но, видимо, не тот я витязь,<br>
-            Что страх способен превозмочь,<br>
-            С Горынычем в дремоте видясь,<br>
-            В кровавой бане парясь в ночь.<br><br>
-
-            Иллюзий рушатся постройки,<br>
-            Смывает их вода времён,<br>
-            Но слышу я не грохот бойкий —<br>
-            Малиновый вечерний звон:<br><br>
-
-            «Осталось лишь поверить Богу,<br>
-            Почуяв небо за версту,<br>
-            Тому, что путь и есть дорога<br>
-            Через распятье ко Христу».
-          </p>
-        </article>
-
-        <!-- Стих 9 -->
-        <article class="poem-block">
-          <h3 class="poem-title">Не сея ветер, бурю не пожну</h3>
-          <p class="poem-text">
-            Не сея ветер, бурю не пожну<br>
-            И выплачу долги, а не глаза,<br>
-            В купели Силоамской утону,<br>
-            Но выплыву на алых парусах.<br><br>
-
-            Хорошими намереньями в ад<br>
-            Не вымощу дорогу и в строю<br>
-            Не буду я, как доблестный солдат,<br>
-            Маршировать у бездны на краю.<br><br>
-
-            Не соберусь назад, не оглянусь —<br>
-            Там обо мне минувшее скорбит:<br>
-            Царевна-Лебедь и Святая Русь,<br>
-            Любовный ялик, что о быт разбит…
-          </p>
-        </article>
-
-        <!-- Стих 10 -->
-        <article class="poem-block">
-          <h3 class="poem-title">Ни голод Гамсуна, ни тошнота Жан Поля</h3>
-          <p class="poem-text">
-            Ни голод Гамсуна, ни тошнота Жан Поля,<br>
-            Ни скрипка Цанна, ни звучанье сфер,<br>
-            Ни крепость градуса, а пик духовной боли<br>
-            Меня ведёт холодной ночью в сквер.<br><br>
-
-            Я там брожу один и в полный голос<br>
-            Молчу, ищу себя в районе двух<br>
-            Часов и понимаю, что мой дух<br>
-            Не от Земли — с другого поля колос…
-          </p>
-        </article>
-
-        <!-- Стих 11 -->
-        <article class="poem-block">
-          <h3 class="poem-title">Мы долго просидели, но быстро поседели</h3>
-          <p class="poem-text">
-            Мы долго просидели, но быстро поседели.<br>
-            Смотрели из окошка на метели,<br>
-            Бросали якоря, бывали на мели,<br>
-            Тонули, вылезали из петли.<br><br>
-
-            Не зная броду, часто лезли в воду,<br>
-            У моря ждали ясную погоду,<br>
-            Не верили, что может задушить<br>
-            Та жаба, что мешает просто жить.<br><br>
-
-            Да, было дело, помню, кровь кипела,<br>
-            Но отзвенело «Кар» вороны белой,<br>
-            Слетело облако с черёмухи легко<br>
-            И на стекло озёрное легло.<br><br>
-
-            Я, помню всё, шепчу: «Спасибо Богу.<br>
-            Всего я взял от жизни понемногу…»
-          </p>
-        </article>
-
+      <!-- Стих 12 -->
+      <div class="poem-block">
+        <p>
+          Морфей, ты знал Орфея? Так приклей<br>
+          К моим глазам те сны, где вы знакомы,<br>
+          Пока листвою месяц журавлей<br>
+          С дерев летит в мою ночную дрёму.<br>
+          Пока вдали не вижу ни строки,<br>
+          Роняет звёзды синеокий космос.<br>
+          Сангина сардонической тоски<br>
+          Острога вырисовывает образ.<br>
+          И сам себе твержу я: «Сказка — ложь,<br>
+          Ты не рождён, чтоб Кафку сделать былью,<br>
+          Но божью явь на сон людской помножь<br>
+          И стань в глазах своих же звёздной пылью».
+        </p>
       </div>
     </div>
 
-    <!-- ВКЛАДКА: ПРОЗА -->
-    <div id="prose" class="tab-content">
-      <div class="coming-soon">
-        Раздел «Проза» скоро будет открыт.<br>
-        Здесь появятся рассказы, миниатюры и очерки.
-      </div>
+    <!-- Проза -->
+    <div id="prose" class="section-content">
+      <p>Здесь будет проза.</p>
     </div>
 
-    <!-- ВКЛАДКА: СТАТЬИ -->
-    <div id="articles" class="tab-content">
-      <div class="coming-soon">
-        Раздел «Статьи» скоро будет открыт.<br>
-        Здесь появятся эссе, литературная критика и публицистика.
-      </div>
+    <!-- Статьи -->
+    <div id="articles" class="section-content">
+      <p>Здесь будут статьи.</p>
     </div>
 
-    <footer>
-      &copy; 2024 Александр Баженов. Все права защищены.
-    </footer>
+    <!-- Эссе -->
+    <div id="essays" class="section-content">
+      <p>Здесь будут эссе.</p>
+    </div>
 
-    <script>
-      function showTab(tabName) {
-        var contents = document.getElementsByClassName('tab-content');
-        for (var i = 0; i < contents.length; i++) {
-          contents[i].classList.remove('active');
-        }
-        var buttons = document.getElementsByClassName('tab-button');
-        for (var i = 0; i < buttons.length; i++) {
-          buttons[i].classList.remove('active');
-        }
-        document.getElementById(tabName).classList.add('active');
-        var tabLabels = { poems: 'Стихи', prose: 'Проза', articles: 'Статьи' };
-        var label = tabLabels[tabName];
-        for (var i = 0; i < buttons.length; i++) {
-          if (buttons[i].textContent === label) {
-            buttons[i].classList.add('active');
-            break;
-          }
-        }
-      }
+    <!-- Очерки -->
+    <div id="sketches" class="section-content">
+      <p>Здесь будут очерки.</p>
+    </div>
 
-      function togglePoems() {
-        var morePoems = document.getElementById('more-poems');
-        var btn = document.querySelector('.read-more-btn');
-        if (morePoems.style.display === 'none') {
-          morePoems.style.display = 'block';
-          btn.textContent = '↑ Свернуть';
-        } else {
-          morePoems.style.display = 'none';
-          btn.textContent = 'Читать дальше →';
-        }
-      }
-    </script>
+    <!-- Фотоальбом -->
+    <div id="photo" class="section-content">
+      <div class="photo-area">
+        <!-- Сюда можно вставить фото -->
+        <img src="images/photo1.jpg" alt="Фото для сайта" />
+      </div>
+      <p>Добавьте сюда другие фото в галерее.</p>
+    </div>
+
+    <!-- Библиотека публикаций -->
+    <div id="library" class="section-content">
+      <p>Здесь будет библиотека публикаций.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; Литературный сайт. Все права принадлежат автору.</p>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.section-content');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // убираем активный класс у всех
+        buttons.forEach(b => b.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+
+        // добавляем активный класс нажатой кнопке и нужному блоку
+        btn.classList.add('active');
+        const targetId = btn.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

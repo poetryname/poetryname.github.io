@@ -2,7 +2,12 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Литературный сайт</title>
+  <title>Литературный уголок</title>
+  <!-- Подключаем декоративный шрифт для заголовка -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
   <style>
     body {
       font-family: Georgia, serif;
@@ -12,21 +17,60 @@
       margin: 0;
       padding: 0 16px;
     }
+
     header {
-      text-align: center;
-      padding: 30px 0;
+      padding: 24px 0;
+      position: relative;
     }
-    h1 { margin: 0; font-size: 2.2rem; }
+
+    /* Фото автора: круглая, слева вверху */
+    .author-photo {
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      border: 3px solid #f0f0f0;
+    }
+
+    .header-content {
+      /* Отступ слева, чтобы текст не наезжал на фото */
+      padding-left: 110px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 2rem;
+      font-weight: 700;
+      /* Узорный/декоративный шрифт */
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+      color: #2c3e50;
+    }
+
+    .author-info {
+      margin: 0;
+      font-size: 1rem;
+      color: #555;
+      font-family: Georgia, serif;
+    }
+
     nav {
       margin-top: 20px;
       overflow-x: auto;
     }
+
     .tabs {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
     }
+
     .tab-btn {
       padding: 10px 16px;
       border: 1px solid #ccc;
@@ -36,12 +80,15 @@
       font-size: 1rem;
       transition: background 0.2s, color 0.2s;
     }
+
     .tab-btn:hover { background: #eee; }
+
     .tab-btn.active {
       background: #2c3e50;
       color: white;
       border-color: #2c3e50;
     }
+
     .toggle-btn {
       display: block;
       margin: 20px auto;
@@ -54,19 +101,19 @@
       cursor: pointer;
       transition: background 0.2s;
     }
+
     .toggle-btn:hover { background: #a0522d; }
+
     main { padding: 24px 0; }
-    .section-content {
-      display: none;
-    }
-    .section-content.active {
-      display: block;
-      animation: fadeIn 0.4s ease;
-    }
+
+    .section-content { display: none; }
+    .section-content.active { display: block; animation: fadeIn 0.4s ease; }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+
     .poem-block {
       max-width: 700px;
       margin: 32px auto;
@@ -74,25 +121,31 @@
       background: white;
       border-left: 4px solid #8b4513;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      position: relative;
     }
+
+    /* Снежинки-разделители: выровнены по началу первой строки стиха */
     .snowflake-divider {
-      text-align: center;
-      font-size: 1.4rem;
+      display: inline-block;
+      font-size: 1.2rem;
       color: #8b4513;
-      letter-spacing: 0.5em;
-      margin: 0 0 12px 0;
+      margin: -16px 0 12px 0; /* немного поднимаем и задаём отступ снизу */
+      letter-spacing: 0.3em;
       user-select: none;
     }
+
     .photo-area {
       text-align: center;
       margin: 32px 0;
     }
+
     .photo-area img {
       max-width: 100%;
       height: auto;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
     footer {
       text-align: center;
       padding: 40px 0;
@@ -103,7 +156,14 @@
 </head>
 <body>
   <header>
-    <h1>Литературный уголок</h1>
+    <!-- Круглое фото автора (замените src на путь к вашему фото) -->
+    <img src="images/author.jpg" alt="Александр Баженов" class="author-photo">
+
+    <div class="header-content">
+      <h1>ЛИТЕРАТУРНЫЙ УГОЛОК</h1>
+      <p class="author-info">Александр Баженов, поэт, писатель, эссеист.<br>
+        Живёт и работает в Екатеринбурге</p>
+    </div>
   </header>
 
   <nav>
@@ -126,7 +186,7 @@
     <div id="poetry" class="section-content">
       <!-- Стих 1 -->
       <div class="poem-block">
-        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
+        <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           В последнее время в порядке вещей<br>
           Пределы разумного я размываю,<br>
@@ -141,7 +201,7 @@
 
       <!-- Стих 2 -->
       <div class="poem-block">
-        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
+        <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           Проходит время, рушатся миры.<br>
           И мы уже не те, что были в плане<br>
@@ -168,7 +228,7 @@
 
       <!-- Стих 3 -->
       <div class="poem-block">
-        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
+        <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           Вернётся бумеранг за камни в огороде<br>
           Ко всем разжёгшим ненависть без дров,<br>
@@ -187,7 +247,7 @@
 
       <!-- Стих 4 -->
       <div class="poem-block">
-        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
+        <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           Дышать тайгой, гулять речною поймой,<br>
           Не думая о том, что не дано<br>
@@ -210,7 +270,7 @@
 
       <!-- Стих 5 -->
       <div class="poem-block">
-        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
+        <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           Не первую скрипку<br>
           Играю я слепком<br>
@@ -229,7 +289,7 @@
 
       <!-- Стих 6 -->
       <div class="poem-block">
-        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
+        <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           Так злых красот живые тени,<br>
           В лучах сгорая, напоследок<br>
@@ -248,7 +308,7 @@
 
       <!-- Стих 7 -->
       <div class="poem-block">
-        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
+        <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           Открыть тетрадь, писать навзрыд,<br>
           Непринуждённым Пастернаком,<br>
@@ -263,7 +323,7 @@
 
       <!-- Стих 8 -->
       <div class="poem-block">
-        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
+        <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           Город, что гудит людскими ульями,<br>
           Отразит во взгляде злая грусть,<br>
@@ -282,7 +342,7 @@
 
       <!-- Стих 9 -->
       <div class="poem-block">
-        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
+        <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           Ответит лишь читатель: поэт я или нет,<br>
           Сквозь ямб, хорей и дактиль смотрящий на рассвет.<br>
@@ -305,7 +365,7 @@
 
       <!-- Стих 10 -->
       <div class="poem-block">
-        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
+        <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           Мы долго просидели, но быстро поседели.<br>
           Смотрели из окошка на метели,<br>
@@ -326,10 +386,10 @@
 
       <!-- Стих 11 -->
       <div class="poem-block">
-        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
+        <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           Трамвай звенит и движется в депо,<br>
-          Весна в ажуре розовой сирени<br>
+          Весна в ажуре розовой сирени<br>          
           Шагает в сон поэта прямо по<br>
           Отброшенной закатом смертной тени.<br>
           Сквозь май прозрачный смотришь ты в июнь,<br>
@@ -345,7 +405,7 @@
 
       <!-- Стих 12 -->
       <div class="poem-block">
-        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
+        <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           Морфей, ты знал Орфея? Так приклей<br>
           К моим глазам те сны, где вы знакомы,<br>
@@ -405,7 +465,7 @@
     const buttons    = document.querySelectorAll('.tab-btn');
     const contents   = document.querySelectorAll('.section-content');
     const toggleBtn  = document.getElementById('toggleBtn');
-    let expanded = false; // содержимое скрыто по умолчанию
+    let expanded = false;
 
     // При переключении вкладки — скрываем содержимое и сбрасываем кнопку
     buttons.forEach(btn => {

@@ -16,40 +16,34 @@
     }
 
     header {
-      padding: 30px 0 50px 0;
+      padding: 40px 0; /* одинаковый отступ сверху и до панели */
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center; /* центрируем содержимое хедера */
     }
 
     .author-photo {
-      position: absolute;
-      top: 10px;
-      left: 0;
       width: 130px;
       height: 130px;
       border-radius: 50%;
       object-fit: cover;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       border: 3px solid #f0f0f0;
+      flex-shrink: 0; /* чтобы фото не сплющивалось */
+      margin-right: 24px; /* расстояние между фото и текстом */
     }
 
-    .header-content {
-      padding-left: 155px;
+    .header-text {
       text-align: left;
-      min-height: 130px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .author-info {
-      margin: 0;
       font-size: 1.05rem;
       color: #444;
       line-height: 1.9;
+      max-width: 560px;
     }
 
     nav {
-      margin-top: 80px;
+      margin: 40px 0; /* такой же отступ, как у header сверху — линия ровная */
       overflow-x: auto;
     }
 
@@ -145,12 +139,10 @@
 <body>
   <header>
     <img src="images/author.jpg" alt="Александр Баженов" class="author-photo">
-    <div class="header-content">
-      <p class="author-info">
-        Литературный проект и авторский сайт Александра Баженова.<br>
-        Александр Баженов, поэт, писатель, эссеист.<br>
-        Живёт и работает в Екатеринбурге
-      </p>
+    <div class="header-text">
+      <p style="margin:0;">Литературный проект и авторский сайт Александра Баженова.</p>
+      <p style="margin:0;">Александр Баженов, поэт, писатель, эссеист.</p>
+      <p style="margin:0;">Живёт и работает в Екатеринбурге.</p>
     </div>
   </header>
 

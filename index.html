@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -43,13 +42,31 @@
       color: white;
       border-color: #2c3e50;
     }
+    .toggle-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 28px;
+      background: #8b4513;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle-btn:hover { background: #a0522d; }
     main { padding: 24px 0; }
     .section-content {
       display: none;
+    }
+    .section-content.active {
+      display: block;
       animation: fadeIn 0.4s ease;
     }
-    .section-content.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
     .poem-block {
       max-width: 700px;
       margin: 32px auto;
@@ -57,6 +74,14 @@
       background: white;
       border-left: 4px solid #8b4513;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .snowflake-divider {
+      text-align: center;
+      font-size: 1.4rem;
+      color: #8b4513;
+      letter-spacing: 0.5em;
+      margin: 0 0 12px 0;
+      user-select: none;
     }
     .photo-area {
       text-align: center;
@@ -93,11 +118,15 @@
     </div>
   </nav>
 
+  <!-- Кнопка сворачивания/разворачивания -->
+  <button class="toggle-btn" id="toggleBtn">Читать дальше</button>
+
   <main>
-    <!-- Стихи -->
-    <div id="poetry" class="section-content active">
+    <!-- ===== Стихи ===== -->
+    <div id="poetry" class="section-content">
       <!-- Стих 1 -->
       <div class="poem-block">
+        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
         <p>
           В последнее время в порядке вещей<br>
           Пределы разумного я размываю,<br>
@@ -112,6 +141,7 @@
 
       <!-- Стих 2 -->
       <div class="poem-block">
+        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
         <p>
           Проходит время, рушатся миры.<br>
           И мы уже не те, что были в плане<br>
@@ -138,6 +168,7 @@
 
       <!-- Стих 3 -->
       <div class="poem-block">
+        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
         <p>
           Вернётся бумеранг за камни в огороде<br>
           Ко всем разжёгшим ненависть без дров,<br>
@@ -156,6 +187,7 @@
 
       <!-- Стих 4 -->
       <div class="poem-block">
+        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
         <p>
           Дышать тайгой, гулять речною поймой,<br>
           Не думая о том, что не дано<br>
@@ -178,6 +210,7 @@
 
       <!-- Стих 5 -->
       <div class="poem-block">
+        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
         <p>
           Не первую скрипку<br>
           Играю я слепком<br>
@@ -196,6 +229,7 @@
 
       <!-- Стих 6 -->
       <div class="poem-block">
+        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
         <p>
           Так злых красот живые тени,<br>
           В лучах сгорая, напоследок<br>
@@ -214,6 +248,7 @@
 
       <!-- Стих 7 -->
       <div class="poem-block">
+        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
         <p>
           Открыть тетрадь, писать навзрыд,<br>
           Непринуждённым Пастернаком,<br>
@@ -228,6 +263,7 @@
 
       <!-- Стих 8 -->
       <div class="poem-block">
+        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
         <p>
           Город, что гудит людскими ульями,<br>
           Отразит во взгляде злая грусть,<br>
@@ -246,6 +282,7 @@
 
       <!-- Стих 9 -->
       <div class="poem-block">
+        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
         <p>
           Ответит лишь читатель: поэт я или нет,<br>
           Сквозь ямб, хорей и дактиль смотрящий на рассвет.<br>
@@ -268,6 +305,7 @@
 
       <!-- Стих 10 -->
       <div class="poem-block">
+        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
         <p>
           Мы долго просидели, но быстро поседели.<br>
           Смотрели из окошка на метели,<br>
@@ -288,6 +326,7 @@
 
       <!-- Стих 11 -->
       <div class="poem-block">
+        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
         <p>
           Трамвай звенит и движется в депо,<br>
           Весна в ажуре розовой сирени<br>
@@ -306,6 +345,7 @@
 
       <!-- Стих 12 -->
       <div class="poem-block">
+        <div class="snowflake-divider">&#10052; &#10052; &#10052;</div>
         <p>
           Морфей, ты знал Орфея? Так приклей<br>
           К моим глазам те сны, где вы знакомы,<br>
@@ -323,36 +363,35 @@
       </div>
     </div>
 
-    <!-- Проза -->
+    <!-- ===== Проза ===== -->
     <div id="prose" class="section-content">
       <p>Здесь будет проза.</p>
     </div>
 
-    <!-- Статьи -->
+    <!-- ===== Статьи ===== -->
     <div id="articles" class="section-content">
       <p>Здесь будут статьи.</p>
     </div>
 
-    <!-- Эссе -->
+    <!-- ===== Эссе ===== -->
     <div id="essays" class="section-content">
       <p>Здесь будут эссе.</p>
     </div>
 
-    <!-- Очерки -->
+    <!-- ===== Очерки ===== -->
     <div id="sketches" class="section-content">
       <p>Здесь будут очерки.</p>
     </div>
 
-    <!-- Фотоальбом -->
+    <!-- ===== Фотоальбом ===== -->
     <div id="photo" class="section-content">
       <div class="photo-area">
-        <!-- Сюда можно вставить фото -->
         <img src="images/photo1.jpg" alt="Фото для сайта" />
       </div>
       <p>Добавьте сюда другие фото в галерее.</p>
     </div>
 
-    <!-- Библиотека публикаций -->
+    <!-- ===== Библиотека публикаций ===== -->
     <div id="library" class="section-content">
       <p>Здесь будет библиотека публикаций.</p>
     </div>
@@ -363,20 +402,40 @@
   </footer>
 
   <script>
-    const buttons = document.querySelectorAll('.tab-btn');
-    const contents = document.querySelectorAll('.section-content');
+    const buttons    = document.querySelectorAll('.tab-btn');
+    const contents   = document.querySelectorAll('.section-content');
+    const toggleBtn  = document.getElementById('toggleBtn');
+    let expanded = false; // содержимое скрыто по умолчанию
 
+    // При переключении вкладки — скрываем содержимое и сбрасываем кнопку
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
-        // убираем активный класс у всех
         buttons.forEach(b => b.classList.remove('active'));
         contents.forEach(c => c.classList.remove('active'));
-
-        // добавляем активный класс нажатой кнопке и нужному блоку
         btn.classList.add('active');
-        const targetId = btn.getAttribute('data-target');
-        document.getElementById(targetId).classList.add('active');
+        document.getElementById(btn.getAttribute('data-target')).classList.add('active');
+
+        // сворачиваем и меняем надпись
+        expanded = false;
+        contents.forEach(c => c.style.display = 'none');
+        toggleBtn.textContent = 'Читать дальше';
       });
+    });
+
+    // Кнопка «Читать дальше / Свернуть»
+    toggleBtn.addEventListener('click', () => {
+      const activeSection = document.querySelector('.section-content.active');
+      if (!activeSection) return;
+
+      if (!expanded) {
+        activeSection.style.display = 'block';
+        toggleBtn.textContent = 'Свернуть';
+        expanded = true;
+      } else {
+        activeSection.style.display = 'none';
+        toggleBtn.textContent = 'Читать дальше';
+        expanded = false;
+      }
     });
   </script>
 </body>

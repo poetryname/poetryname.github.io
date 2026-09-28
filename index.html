@@ -1,12 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <title>Литературный уголок</title>
-  <!-- Подключаем декоративный шрифт для заголовка -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -19,48 +16,40 @@
     }
 
     header {
-      padding: 24px 0;
+      padding: 30px 0 50px 0;
       position: relative;
     }
 
-    /* Фото автора: круглая, слева вверху */
     .author-photo {
       position: absolute;
-      top: 12px;
+      top: 10px;
       left: 0;
-      width: 90px;
-      height: 90px;
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       border: 3px solid #f0f0f0;
     }
 
     .header-content {
-      /* Отступ слева, чтобы текст не наезжал на фото */
-      padding-left: 110px;
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0 0 8px 0;
-      font-size: 2rem;
-      font-weight: 700;
-      /* Узорный/декоративный шрифт */
-      font-family: 'Cinzel', serif;
-      letter-spacing: 1px;
-      color: #2c3e50;
+      padding-left: 155px;
+      text-align: left;
+      min-height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .author-info {
       margin: 0;
-      font-size: 1rem;
-      color: #555;
-      font-family: Georgia, serif;
+      font-size: 1.05rem;
+      color: #444;
+      line-height: 1.9;
     }
 
     nav {
-      margin-top: 20px;
+      margin-top: 80px;
       overflow-x: auto;
     }
 
@@ -124,12 +113,11 @@
       position: relative;
     }
 
-    /* Снежинки-разделители: выровнены по началу первой строки стиха */
     .snowflake-divider {
       display: inline-block;
       font-size: 1.2rem;
       color: #8b4513;
-      margin: -16px 0 12px 0; /* немного поднимаем и задаём отступ снизу */
+      margin: -16px 0 12px 0;
       letter-spacing: 0.3em;
       user-select: none;
     }
@@ -156,13 +144,13 @@
 </head>
 <body>
   <header>
-    <!-- Круглое фото автора (замените src на путь к вашему фото) -->
     <img src="images/author.jpg" alt="Александр Баженов" class="author-photo">
-
     <div class="header-content">
-      <h1>ЛИТЕРАТУРНЫЙ УГОЛОК</h1>
-      <p class="author-info">Александр Баженов, поэт, писатель, эссеист.<br>
-        Живёт и работает в Екатеринбурге</p>
+      <p class="author-info">
+        Литературный проект и авторский сайт Александра Баженова.<br>
+        Александр Баженов, поэт, писатель, эссеист.<br>
+        Живёт и работает в Екатеринбурге
+      </p>
     </div>
   </header>
 
@@ -178,7 +166,6 @@
     </div>
   </nav>
 
-  <!-- Кнопка сворачивания/разворачивания -->
   <button class="toggle-btn" id="toggleBtn">Читать дальше</button>
 
   <main>
@@ -389,7 +376,7 @@
         <span class="snowflake-divider">❄ ❄ ❄</span>
         <p>
           Трамвай звенит и движется в депо,<br>
-          Весна в ажуре розовой сирени<br>          
+          Весна в ажуре розовой сирени<br>
           Шагает в сон поэта прямо по<br>
           Отброшенной закатом смертной тени.<br>
           Сквозь май прозрачный смотришь ты в июнь,<br>
@@ -462,12 +449,11 @@
   </footer>
 
   <script>
-    const buttons    = document.querySelectorAll('.tab-btn');
-    const contents   = document.querySelectorAll('.section-content');
-    const toggleBtn  = document.getElementById('toggleBtn');
+    const buttons   = document.querySelectorAll('.tab-btn');
+    const contents  = document.querySelectorAll('.section-content');
+    const toggleBtn = document.getElementById('toggleBtn');
     let expanded = false;
 
-    // При переключении вкладки — скрываем содержимое и сбрасываем кнопку
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         buttons.forEach(b => b.classList.remove('active'));
@@ -475,14 +461,12 @@
         btn.classList.add('active');
         document.getElementById(btn.getAttribute('data-target')).classList.add('active');
 
-        // сворачиваем и меняем надпись
         expanded = false;
         contents.forEach(c => c.style.display = 'none');
         toggleBtn.textContent = 'Читать дальше';
       });
     });
 
-    // Кнопка «Читать дальше / Свернуть»
     toggleBtn.addEventListener('click', () => {
       const activeSection = document.querySelector('.section-content.active');
       if (!activeSection) return;

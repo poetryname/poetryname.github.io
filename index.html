@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,20 +5,13 @@
 <title>Литературный уголок</title>
 
 <style>
-:root {
-  --total-bg: #f9f9f7;
-  --total-text: #1a1a1a;
-  --total-font: Georgia, serif;
-  --total-line-height: 1.7;
-}
-
 body {
-  font-family: var(--total-font);
-  line-height: var(--total-line-height);
-  color: var(--total-text);
-  background: var(--total-bg);
-  margin: 0;
-  padding: 0 16px;
+font-family: Georgia, serif;
+line-height: 1.7;
+color: #1a1a1a;
+background: #f9f9f7;
+margin: 0;
+padding: 0 16px;
 }
 
 header {
@@ -140,108 +132,6 @@ text-align: center;
 padding: 40px 0;
 color: #777;
 font-size: 0.9rem;
-}       
-
-/* Строгие поля для прозы — текст в аккуратном столбце */
-#prose {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 24px 16px;
-  box-sizing: border-box;
-}
-
-#prose p {
-  line-height: 1.8;
-  text-align: left;
-  margin-bottom: 18px;
-  hyphens: auto;
-}
-
-#prose h3 {
-  margin-top: 36px;
-  margin-bottom: 16px;
-  font-size: 1.4rem;
-}
-
-@media (max-width: 600px) {
-  #prose {
-    max-width: none;
-    padding: 16px 12px;
-  }
-}/* Статьи — те же поля, что у прозы */
-#articles {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 24px 16px;
-  box-sizing: border-box;
-}
-
-#articles p {
-  line-height: 1.8;
-  text-align: left;
-  margin-bottom: 18px;
-  hyphens: auto;
-}
-
-#articles h3 {
-  margin-top: 36px;
-  margin-bottom: 16px;
-  font-size: 1.4rem;
-}
-
-#articles .article-subtitle {
-  font-style: italic;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-#articles .toc {
-  list-style: none;
-  padding: 0;
-  margin: 20px 0 32px;
-  counter-reset: toc;
-}
-
-#articles .toc li {
-  margin-bottom: 8px;
-  counter-increment: toc;
-}
-
-#articles .toc li::before {
-  content: counter(toc) ". ";
-  color: #8b4513;
-  font-weight: bold;
-}
-
-#articles .toc a {
-  color: #8b4513;
-  text-decoration: none;
-}
-
-#articles .toc a:hover {
-  text-decoration: underline;
-}
-
-#articles .article-poem {
-  max-width: 600px;
-  margin: 24px auto;
-  padding: 16px 20px;
-  background: #faf8f5;
-  border-left: 3px solid #8b4513;
-  line-height: 1.6;
-}
-
-#articles .article-poem p {
-  margin: 0;
-  text-align: left;
-  hyphens: none;
-}
-
-@media (max-width: 600px) {
-  #articles {
-    max-width: none;
-    padding: 16px 12px;
-  }
 }
 </style>
 </head>
@@ -637,365 +527,39 @@ font-size: 0.9rem;
 </footer>
 
 <script>
-/* ============================================== */
-/*  ОСНОВНОЙ КОД — НЕ ТРОГАТЬ                      */
-/* ============================================== */
-
 const buttons = document.querySelectorAll('.tab-btn');
 const contents = document.querySelectorAll('.section-content');
 const toggleBtn = document.getElementById('toggleBtn');
 let expanded = false;
 
 buttons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    buttons.forEach(b => b.classList.remove('active'));
-    contents.forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(btn.getAttribute('data-target')).classList.add('active');
+btn.addEventListener('click', () => {
+buttons.forEach(b => b.classList.remove('active'));
+contents.forEach(c => c.classList.remove('active'));
+btn.classList.add('active');
+document.getElementById(btn.getAttribute('data-target')).classList.add('active');
 
-    expanded = false;
-    contents.forEach(c => c.style.display = 'none');
-    toggleBtn.textContent = 'Читать дальше';
-  });
+expanded = false;
+contents.forEach(c => c.style.display = 'none');
+toggleBtn.textContent = 'Читать дальше';
+});
 });
 
 toggleBtn.addEventListener('click', () => {
-  const activeSection = document.querySelector('.section-content.active');
-  if (!activeSection) return;
+const activeSection = document.querySelector('.section-content.active');
+if (!activeSection) return;
 
-  if (!expanded) {
-    activeSection.style.display = 'block';
-    toggleBtn.textContent = 'Свернуть';
-    expanded = true;
-  } else {
-    activeSection.style.display = 'none';
-    toggleBtn.textContent = 'Читать дальше';
-    expanded = false;
-  }
+if (!expanded) {
+activeSection.style.display = 'block';
+toggleBtn.textContent = 'Свернуть';
+expanded = true;
+} else {
+activeSection.style.display = 'none';
+toggleBtn.textContent = 'Читать дальше';
+expanded = false;
+}
 });
-
-/* ============================================== */
-/*  СИСТЕМА PATCH — ВСЕ ИЗМЕНЕНИЯ ТОЛЬКО ЗДЕСЬ     */
-/*  Дописывайте команды в самый низ,              */
-/*  не трогая основной код выше.                   */
-/* ============================================== */
-
-const PATCH = {
-  bg: function(color) {
-    document.body.style.background = color;
-  },
-  accent: function(color) {
-    const s = document.createElement('style');
-    s.textContent = '.poem-block{border-left-color:' + color + '!important}' +
-      '.snowflake-divider{color:' + color + '!important}' +
-      '.toggle-btn{background:' + color + '!important}';
-    document.head.appendChild(s);
-  },
-  tabColor: function(color) {
-    const s = document.createElement('style');
-    s.textContent = '.tab-btn.active{background:' + color + ';color:white;border-color:' + color + '}';
-    document.head.appendChild(s);
-  },
-  font: function(fontFamily) {
-    document.body.style.fontFamily = fontFamily;
-  },
-  tab: function(tabId, show) {
-    const btn = document.querySelector('[data-target="' + tabId + '"]');
-    const sec = document.getElementById(tabId);
-    if (btn) btn.style.display = show ? '' : 'none';
-    if (sec && !show) sec.style.display = 'none';
-  },
-  text: function(selector, newText) {
-    document.querySelectorAll(selector).forEach(function(el) {
-      el.textContent = newText;
-    });
-  },
-  html: function(selector, newHTML) {
-    document.querySelectorAll(selector).forEach(function(el) {
-      el.innerHTML = newHTML;
-    });
-  },
-  css: function(selector, cssText) {
-    const s = document.createElement('style');
-    s.textContent = selector + ' { ' + cssText + ' }';
-    document.head.appendChild(s);
-  },
-  on: function(selector, event, handler) {
-    document.querySelectorAll(selector).forEach(function(el) {
-      el.addEventListener(event, handler);
-    });
-  },
-  attr: function(selector, attrName, value) {
-    document.querySelectorAll(selector).forEach(function(el) {
-      el.setAttribute(attrName, value);
-    });
-  },
-  addClass: function(selector, className) {
-    document.querySelectorAll(selector).forEach(function(el) {
-      el.classList.add(className);
-    });
-  },
-  removeClass: function(selector, className) {
-    document.querySelectorAll(selector).forEach(function(el) {
-      el.classList.remove(className);
-    });
-  }
-};
-
-/* ============================================== */
-/*  ВАШИ ИЗМЕНЕНИЯ — ДОПИСЫВАЙТЕ СЮДА              */
-/*  (каждая строка — отдельное изменение)          */
-/* ============================================== */                             
-<style>
-  .article-text {
-    max-height: 300px;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    position: relative;
-  }
-  .article-text.expanded {
-    max-height: none;
-    overflow: visible;
-  }
-  .read-more-btn {
-    display: block;
-    margin: 12px auto 0;
-    padding: 8px 20px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    background: #fff;
-    color: #333;
-    font-size: 14px;
-  }
-  .read-more-btn:hover {
-    background: #f5f5f5;
-  }
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const btns = document.querySelectorAll('.read-more-btn');
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const articleBlock = btn.closest('.article-block');
-        const text = articleBlock.querySelector('.article-text');
-        const isExpanded = text.classList.contains('expanded');
-
-        if (isExpanded) {
-          text.classList.remove('expanded');
-          btn.textContent = 'Читать дальше';
-        } else {
-          text.classList.add('expanded');
-          btn.textContent = 'Свернуть';
-        }
-      });
-    });
-  });
-</script>
-<section class="articles">
-  <div class="container">
-    <h2 class="section-title">Статьи</h2>
-
-    <div class="content-list">
-      <p class="content-item">1. Иосиф Бродский</p>
-      <p class="content-item">2. Борис Рыжий</p>
-      <p class="content-item">3. Николай Зиновьев</p>
-      <p class="content-item">4. Константин Комаров</p>
-      <p class="content-item">5. Алексей Решетов</p>
-      <p class="content-item">6. Сергей Гандлевский</p>
-      <p class="content-item">7. Александр Сопровский</p>
-      <p class="content-item">8. Николай Рубцов</p>
-      <p class="content-item">9. Валерий Капленко</p>
-    </div>
-
-    <article class="article-block">
-      <h3 class="article-title">Иосиф Бродский. Рождественские лучи</h3>
-      <div class="article-text">
-        <p>Говоря о современной поэзии, нельзя обойти имя Иосифа Бродского, чьё влияние на русскую литературу сложно переоценить. О личности поэта и его творчестве написано много обзорных и аналитических статей, и я, конечно, ничего нового к уже сказанному не добавлю. Однако скажу несколько слов о его «Рождественских стихах». Основой Рождественскому циклу служит идея Бродского на каждое Рождество писать по стихотворению.</p>
-        <p>Картинка «Поклонение волхвов» из польского журнала, религиозно‑философские сонеты Джона Донна, евангельские стихи Бориса Пастернака из «Доктора Живаго» — не столь важно, на мой взгляд, что именно вдохновило Бродского на написание «Рождественских стихов». Важно другое. Важно, что Иосиф Бродский являлся верующим православным поэтом. Такое утверждение я делаю небезосновательно. Самым простым и неопровержимым доказательством, на мой взгляд, является фраза, взятая из стенограммы суда над Бродским: «Я думаю, это… от Бога…».</p>
-        <p>Мнения, что «Рождественские стихи» Бродского являются просто циклом, не выдерживают никакой критики. «Рождественские стихи» — символ веры автора. В лирике Маяковского, в творчестве Рыжего, например, Бог фигурирует часто, но читатель чувствует угол зрения бескомпромиссного атеизма. У Бродского в каждой строке о Рождестве, о Христе и Марии прослеживается какой‑то благоговейный трепет, с которым поэт подходил к их написанию.</p>
-        <p>Духовная глубина цикла проявляется в том, как поэт осмысляет религиозные темы без излишней риторики и пафоса. Смысловая и лексическая гармоничность говорят о том, что Рождество у поэта — единственная тема, к которой он относился с полной серьёзностью, без характерной для него иронии. На мой взгляд, «Рождественские стихи» — основная канва в картине мира Бродского, один из его образцовых циклов, а возможно, и лучший.</p>
-        <p>Библейские мотивы передаются в нейтральном тоне, без религиозной патетики. Бродский стилизовал литургическую поэтику, вызревающую в «светскую» интерпретацию сакральной темы, соизмеримую с библейскими стихами Ахматовой и пушкинскими «Подражаниями Корану», как подмечала Анна Подгорская в статье о Рождественской поэзии Бродского. Все картины событий и образы предстают пред глазами читателя с удивительной ясностью.</p>
-        <p>«Рождественские стихи» — не аллюзии, связанные с религиозными сюжетами, а подлинные библейские истории, переведённые автором на художественный язык. Некоторые стихи, объединённые темой Рождества, различаются эмоциональным окрасом и направлением авторского взгляда.</p>
-        <p>Возвращаясь к теме Рождества Христова, стоит ещё раз отметить, что в строгих рамках рождественского повествования и библейской тематики поэт не пытается выразить личные мысли и чувства по отношению к событиям Рождества, а раскрывает, насколько эпохальную значимость они имеют для человечества. Для него «пустыня повсюду» пролегает не только в физическом, но и в духовном плане.</p>
-        <p>В заключение хочется сказать, что именно такой библейский огонёк «в четыре свечи» и является тем, что я называю светлым посылом в поэзии. Именно он способен согреть сердца читателей в холодную зимнюю стужу в пустыне…</p>
-      </div>
-    </article>
-
-    <article class="article-block">
-      <h3 class="article-title">Борис Рыжий. Созидание и разрушение в поэзии</h3>
-      <div class="article-text">
-        <p>Евгений Рейн именовал Бориса Рыжего «лучшим поэтом своего поколения» — переходного периода между СССР и Россией. Не случайно к Рыжему легко клеился ярлык: «последний советский поэт». С подросткового возраста я внимательно изучал его творчество. Действительно, в стихах Рыжего чувствовались дух времени и атмосфера уходящей эпохи.</p>
-        <p>Рок, горе, меланхолия, безысходность сопровождают поэта на всём его творческом пути. Рыжий нередко подмечал контраст жизни, в которой одни имеют всё, а другие — ничего. Я люблю стихи Рыжего за то, что его лирический герой зачастую занимает сторону слабых, угнетённых, обездоленных, ушедших и уходящих из жизни людей. Такой подход я уважаю и в поэзии, и в прозе, и в искусстве в целом.</p>
-        <p>Проводя параллель между стихами Бориса Рыжего и его судьбой, нельзя не отметить, что многие его стихи, даже те, в которых речь шла о любви, заканчивались на трагичной ноте. Почему в стихах Рыжего нередко всё заканчивалось так печально? Почему он восклицал: «Больше чёрного горя, поэт!»? Почему его так привлекал фатализм? Возможно, потому, что он не мог смириться с несправедливостью окружающей реальности.</p>
-        <p>Борис Рыжий — один из моих любимых современных поэтов. Я не раз читал и перечитывал его стихи, неоднократно присутствовал на мероприятиях, посвящённых его творчеству. На мой взгляд, многие его стихи обладали определённой метафизической силой и мощной энергией.</p>
-        <p>Грусть, горе, меланхолия имеют место на существование в искусстве, на мой взгляд, поскольку могут натолкнуть человека на глубокие философские размышления не только о его пребывании на Земле, но и о смерти. Но обвинения в сторону Бога или выставления библейских фигур в уничижительном свете в стихах — это та грань, за которую выходить опасно для жизни. Не потому, что «Бог накажет», а потому, что тем самым автор добровольно приглашает в свою жизнь антипода светлых сил.</p>
-        <p>Последний советский поэт Борис Рыжий не боялся перешагивать через эту грань, а, возможно, просто её не видел, что, на мой взгляд, запустило цепь фатальных событий, повлиявших на его трагическую кончину.</p>
-      </div>
-    </article>
-
-    <article class="article-block">
-      <h3 class="article-title">Николай Зиновьев. Духовная основа творчества</h3>
-      <div class="article-text">
-        <p>Зиновьев Николай Александрович — один из моих любимых поэтов. Родина и природа наполняют его небольшие по объёму стихи «полевыми далями», «тающими просторами», «старыми хатами» — вещами, казалось бы, архаичными, но вечными, как сама жизнь.</p>
-        <p>Отличительной чертой авторского стиля Зиновьева является то, что маленькие стихи содержат в себе необъятные пространства, как духовные, так и физические. Явно представляемые этюды, характерные для нашей Родины, придают его произведениям атмосферность и широкий размах. Его философские миниатюры несут в себе не только ответы, но и вопросы, призывающие читателя ответить на них самостоятельно.</p>
-        <p>Боль Зиновьева — неэгоистична и не сфокусирована лишь на личных переживаниях автора или его лирического героя. Она трансцендентальная, обширная, охватывающая большую и малую Родину, беспокойство за её будущее, крах нравственных ценностей в современном обществе.</p>
-        <p>Лирический герой поэта предрасположен к глубинной рефлексии, в которой иногда преобладают мотивы безысходности и мрачные тона. Но в то же время герой Зиновьева не говорит о том, что надо смиряться со злом, принимать всё безропотно и не противостоять несправедливости. Его персонаж — не покорный плебей, а правдолюбивый богатырь, воин света, бунтарь совести, ломающий устоявшийся шаблон того, что «один в поле не воин».</p>
-        <p>Не слепой патриотизм с тупой ненавистью, направленной вовне, а духовная исповедальность стихов Зиновьева, направленная внутрь, имеет широкий мазок и охватывает не столько лирического героя, сколько время и народ, и Россию как метафизическую территорию. В лаконичной форме живёт концентрированная авторская мысль. Каждое произведение — отдельный цельный рассказ со своей историей, в которой правда, пускай и горька, но полезна и бесценна, как лекарство от бездуховности.</p>
-      </div>
-    </article>
-
-    <article class="article-block">
-      <h3 class="article-title">Константин Комаров. Анаграммная поэзия</h3>
-      <div class="article-text">
-        <p>Познакомившись с поэзией Константина Комарова, я вспомнил термин «анаграмма». На мой взгляд, именно анаграмма является коронным приёмом в творчестве Комарова. Думаю, что многие его стихи относятся к пласту «анаграмматической поэзии».</p>
-        <p>С первых строк мне пришлась по душе какая‑то метафорическая концентрированность в каждом четверостишии поэта, которая при этом не является «накручиванием» или «наслоением» — излишним нагромождением образов. Взгляд чётко сформированного лирического героя, как правило, направлен не вовне, а внутрь себя самого. «Археология души», которую проводит Комаров в своих стихах, нацелена на исследование подземелий человеческой психики.</p>
-        <p>У Комарова лирический герой мне видится неким словарным проектировщиком, «вворачивающим слова винт в чистую страницу». Но наиболее значимая строка в приведённом ниже стихотворении находится в конце, как подтверждение того, что автор идёт в «безглагольность», то есть в безмолвие, чтобы «расслышать голос — уже практически не свой». Таким образом, поэт чётко отделяет собственный голос от голоса лирического героя и в стихотворении показывает читателю межличностный контраст.</p>
-        <p>У каждого поэта есть свой метод стихосложения. Константин Комаров в интервью Жанне Щукиной повторил концепцию в своей интерпретации: «Слово „вдохновение“ я не очень люблю. Для меня стихи — более выдох, нежели вдох. Эмоции, мысли, впечатления накапливаются в тебе и, дойдя до какой‑то критической массы, требуют выхода — выдоха в форме стихотворения».</p>
-        <p>И эта бессознательность чувствуется в его стихах, что, конечно, хорошо для поэзии.</p>
-      </div>
-    </article>
-
-    <article class="article-block">
-      <h3 class="article-title">Алексей Решетов. Строчные пейзажи</h3>
-      <div class="article-text">
-        <p>Поэзия Алексея Решетова накрепко переплетена с пейзажами России. В стиле автора видна классическая есенинская школа. Однако его стиль наделён личным восприятием, передающим читателю душевное состояние посредством антропоморфизмов. Его природа — живая, дышащая, одушевлённая: «Подружки‑фиалки», «звёзды в лукошке», «стогов зелёные пилотки».</p>
-        <p>Решетов — поэт‑пейзажист, переплетающий свой внутренний мир и собственное воображение с картинами природы. Лирический герой Решетова — скорее романтик с большой буквы. Его любовь — это высокое чувство, его сердце — далёкое пристанище для родственной души.</p>
-        <p>Грозный, на первый взгляд, Урал в стихах Решетова хранит в себе «нежность», которую открывает не всем, а только тем, кто способен её увидеть. Сжатый, лаконичный, афористичный стиль Решетова, которым дышат наброски и этюды природы, работает на ассоциативном уровне сознания читателя.</p>
-        <p>Речь поэта изобилует уменьшительно‑ласкательными оборотами. Но это оправдано его трогательным (романтическим) взглядом, смотрящим с нежностью на фрагменты живой природы. «Пушинка», «берёзонька», «ветерки» символизируют лёгкость авторской души, воспринимающей родину как мать.</p>
-        <p>Родина в стихах Решетова не «великая», а «трогательная». Поэт иногда обращается к читателям с благородным призывом найти в себе человека с большой буквы.</p>
-        <p>Интересна тема времени в стихах поэта. Он словно говорит о том, что понятие времени для настоящих поэтов является либо относительным, либо размытым, а возможно, вообще отсутствует.</p>
-        <p>Для Решетова, в отличие от многих современных авторов, голос души был несовместим с коммерцией: «Я никогда на рынках книжных душой своей не торговал».</p>
-       </div>
-    </article>
-
-// === SEO: ОПТИМИЗАЦИЯ ДЛЯ ПОИСКОВЫХ СИСТЕМ ===
-
-// Meta description
-(function(){
-  var m = document.createElement('meta');
-  m.name = 'description';
-  m.content = 'Александр Баженов — поэт, писатель, эссеист. Современная поэзия, проза, эссе, очерки. Литературный проект из Екатеринбурга. Стихи о жизни, любви, природе и Родине.';
-  document.head.appendChild(m);
-})();
-
-// Meta keywords
-(function(){
-  var m = document.createElement('meta');
-  m.name = 'keywords';
-  m.content = 'Александр Баженов, Баженов Александр, Баженов Александр Сергеевич, поэзия, стихи, современная поэзия, литература, современные авторы, проза, эссе, очерки, поэт, писатель, эссеист, Екатеринбург, русская поэзия, современная литература, авторский сайт, литературный проект, стихи о любви, стихи о родине, стихи о природе';
-  document.head.appendChild(m);
-})();
-
-// Meta author
-(function(){
-  var m = document.createElement('meta');
-  m.name = 'author';
-  m.content = 'Александр Баженов';
-  document.head.appendChild(m);
-})();
-
-// Meta robots
-(function(){
-  var m = document.createElement('meta');
-  m.name = 'robots';
-  m.content = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
-  document.head.appendChild(m);
-})();
-
-// Open Graph (для соцсетей и поисковиков)
-(function(){
-  var tags = {
-    'og:title': 'Александр Баженов — поэт, писатель, эссеист',
-    'og:description': 'Современная поэзия, проза, эссе и очерки. Литературный проект Александра Баженова из Екатеринбурга.',
-    'og:type': 'website',
-    'og:locale': 'ru_RU',
-    'og:site_name': 'Литературный уголок',
-    'article:author': 'Александр Баженов'
-  };
-  Object.keys(tags).forEach(function(key){
-    var m = document.createElement('meta');
-    m.setAttribute('property', key);
-    m.content = tags[key];
-    document.head.appendChild(m);
-  });
-})();
-
-// JSON-LD: данные об авторе (для Google, Yandex)
-(function(){
-  var s = document.createElement('script');
-  s.type = 'application/ld+json';
-  s.textContent = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    'name': 'Александр Баженов',
-    'givenName': 'Александр',
-    'familyName': 'Баженов',
-    'jobTitle': 'поэт, писатель, эссеист',
-    'address': {
-      '@type': 'PostalAddress',
-      'addressLocality': 'Екатеринбург',
-      'addressRegion': 'Свердловская область',
-      'addressCountry': 'RU'
-    },
-    'description': 'Поэт, писатель, эссеист. Автор стихов о жизни, любви, природе и Родине.',
-    'knowsAbout': ['поэзия', 'стихи', 'современная поэзия', 'литература', 'проза', 'эссе', 'очерки']
-  });
-  document.head.appendChild(s);
-})();
-
-// JSON-LD: данные о сайте
-(function(){
-  var s = document.createElement('script');
-  s.type = 'application/ld+json';
-  s.textContent = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    'name': 'Литературный уголок',
-    'description': 'Литературный проект и авторский сайт Александра Баженова — поэта, писателя, эссеиста.',
-    'inLanguage': 'ru',
-    'author': {
-      '@type': 'Person',
-      'name': 'Александр Баженов'
-    }
-  });
-  document.head.appendChild(s);
-})();
-
-// JSON-LD: список произведений
-(function(){
-  var s = document.createElement('script');
-  s.type = 'application/ld+json';
-  s.textContent = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    'name': 'Литературный уголок — Александр Баженов',
-    'description': 'Сборник стихов, прозы, эссе и очерков современного автора Александра Баженова.',
-    'inLanguage': 'ru',
-    'hasPart': [
-      {'@type': 'Article', 'name': 'Стихи', 'author': {'@type': 'Person', 'name': 'Александр Баженов'}},
-      {'@type': 'Article', 'name': 'Фотоальбом «Родная земля»', 'author': {'@type': 'Person', 'name': 'Александр Баженов'}},
-      {'@type': 'Article', 'name': 'Любовь одиноких птиц', 'author': {'@type': 'Person', 'name': 'Александр Баженов'}},
-      {'@type': 'Article', 'name': 'Город, подаривший мне крылья', 'author': {'@type': 'Person', 'name': 'Александр Баженов'}},
-      {'@type': 'Article', 'name': 'Прозрачные цепи', 'author': {'@type': 'Person', 'name': 'Александр Баженов'}}
-    ]
-  });
-  document.head.appendChild(s);
-})();
-// Примеры (удалите или раскомментируйте при необходимости):
-// PATCH.bg('#f5f0e8');
-// PATCH.accent('#556b2f');
-// PATCH.tabColor('#8b4513');
-// PATCH.font('Palatino, serif');
-// PATCH.tab('library', false);
-// PATCH.text('#toggleBtn', 'Раскрыть');
-// PATCH.html('#articles', '<p>Новый текст</p>');
-// PATCH.css('.toggle-btn', 'border-radius:20px;');
-// PATCH.on('#toggleBtn', 'click', function(){ alert('Клик!'); });
-// PATCH.attr('.author-photo', 'src', 'new.jpg');
-// PATCH.addClass('.toggle-btn', 'rounded');
-// PATCH.removeClass('.tab-btn', 'active');
-
 </script>
 </body>
 </html>
+

@@ -21,7 +21,28 @@ display: flex;
 align-items: center;
 justify-content: center; /* центрируем содержимое хедера */
 }
+/* Контейнер для прозы и статей — строгий столбец */
+#prose, #articles {
+  max-width: 680px;          /* жёсткий предел ширины */
+  margin: 40px auto;         /* центрируем столбец, сверху/снизу воздух */
+  padding: 0 16px;           /* небольшие боковые отступы внутри колонки */
+  box-sizing: border-box;   /* чтобы padding не увеличивал общую ширину */
+}
 
+/* Текст внутри колонки — удобно для чтения */
+#prose p, #articles p {
+  line-height: 1.8;          /* чуть больше воздуха между строками */
+  text-align: left;          /* классический литературный вариант */
+  hyphens: auto;             /* аккуратные переносы слов (работает в большинстве браузеров) */
+  margin-bottom: 24px;        /* расстояние между абзацами */
+}
+
+/* Заголовки в прозе/статьях — чтобы не «прилипали» к тексту */
+#prose h3, #articles h3 {
+  margin-top: 36px;
+  margin-bottom: 16px;
+  font-size: 1.4rem;
+}
 .author-photo {
 width: 130px;
 height: 130px;

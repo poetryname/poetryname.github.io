@@ -738,7 +738,53 @@ const PATCH = {
 /* ============================================== */
 /*  ВАШИ ИЗМЕНЕНИЯ — ДОПИСЫВАЙТЕ СЮДА              */
 /*  (каждая строка — отдельное изменение)          */
-/* ============================================== */
+/* ============================================== */                             
+<style>
+  .article-text {
+    max-height: 300px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    position: relative;
+  }
+  .article-text.expanded {
+    max-height: none;
+    overflow: visible;
+  }
+  .read-more-btn {
+    display: block;
+    margin: 12px auto 0;
+    padding: 8px 20px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background: #fff;
+    color: #333;
+    font-size: 14px;
+  }
+  .read-more-btn:hover {
+    background: #f5f5f5;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btns = document.querySelectorAll('.read-more-btn');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const articleBlock = btn.closest('.article-block');
+        const text = articleBlock.querySelector('.article-text');
+        const isExpanded = text.classList.contains('expanded');
+
+        if (isExpanded) {
+          text.classList.remove('expanded');
+          btn.textContent = 'Читать дальше';
+        } else {
+          text.classList.add('expanded');
+          btn.textContent = 'Свернуть';
+        }
+      });
+    });
+  });
+</script>
 <section class="articles">
   <div class="container">
     <h2 class="section-title">Статьи</h2>

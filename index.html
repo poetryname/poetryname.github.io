@@ -528,38 +528,130 @@ font-size: 0.9rem;
 </footer>
 
 <script>
+/* ============================================== */
+/*  ОСНОВНОЙ КОД — НЕ ТРОГАТЬ                      */
+/* ============================================== */
+
 const buttons = document.querySelectorAll('.tab-btn');
 const contents = document.querySelectorAll('.section-content');
 const toggleBtn = document.getElementById('toggleBtn');
 let expanded = false;
 
 buttons.forEach(btn => {
-btn.addEventListener('click', () => {
-buttons.forEach(b => b.classList.remove('active'));
-contents.forEach(c => c.classList.remove('active'));
-btn.classList.add('active');
-document.getElementById(btn.getAttribute('data-target')).classList.add('active');
+  btn.addEventListener('click', () => {
+    buttons.forEach(b => b.classList.remove('active'));
+    contents.forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.getAttribute('data-target')).classList.add('active');
 
-expanded = false;
-contents.forEach(c => c.style.display = 'none');
-toggleBtn.textContent = 'Читать дальше';
-});
+    expanded = false;
+    contents.forEach(c => c.style.display = 'none');
+    toggleBtn.textContent = 'Читать дальше';
+  });
 });
 
 toggleBtn.addEventListener('click', () => {
-const activeSection = document.querySelector('.section-content.active');
-if (!activeSection) return;
+  const activeSection = document.querySelector('.section-content.active');
+  if (!activeSection) return;
 
-if (!expanded) {
-activeSection.style.display = 'block';
-toggleBtn.textContent = 'Свернуть';
-expanded = true;
-} else {
-activeSection.style.display = 'none';
-toggleBtn.textContent = 'Читать дальше';
-expanded = false;
-}
+  if (!expanded) {
+    activeSection.style.display = 'block';
+    toggleBtn.textContent = 'Свернуть';
+    expanded = true;
+  } else {
+    activeSection.style.display = 'none';
+    toggleBtn.textContent = 'Читать дальше';
+    expanded = false;
+  }
 });
+
+/* ============================================== */
+/*  СИСТЕМА PATCH — ВСЕ ИЗМЕНЕНИЯ ТОЛЬКО ЗДЕСЬ     */
+/*  Дописывайте команды в самый низ,              */
+/*  не трогая основной код выше.                   */
+/* ============================================== */
+
+const PATCH = {
+  bg: function(color) {
+    document.body.style.background = color;
+  },
+  accent: function(color) {
+    const s = document.createElement('style');
+    s.textContent = '.poem-block{border-left-color:' + color + '!important}' +
+      '.snowflake-divider{color:' + color + '!important}' +
+      '.toggle-btn{background:' + color + '!important}';
+    document.head.appendChild(s);
+  },
+  tabColor: function(color) {
+    const s = document.createElement('style');
+    s.textContent = '.tab-btn.active{background:' + color + ';color:white;border-color:' + color + '}';
+    document.head.appendChild(s);
+  },
+  font: function(fontFamily) {
+    document.body.style.fontFamily = fontFamily;
+  },
+  tab: function(tabId, show) {
+    const btn = document.querySelector('[data-target="' + tabId + '"]');
+    const sec = document.getElementById(tabId);
+    if (btn) btn.style.display = show ? '' : 'none';
+    if (sec && !show) sec.style.display = 'none';
+  },
+  text: function(selector, newText) {
+    document.querySelectorAll(selector).forEach(function(el) {
+      el.textContent = newText;
+    });
+  },
+  html: function(selector, newHTML) {
+    document.querySelectorAll(selector).forEach(function(el) {
+      el.innerHTML = newHTML;
+    });
+  },
+  css: function(selector, cssText) {
+    const s = document.createElement('style');
+    s.textContent = selector + ' { ' + cssText + ' }';
+    document.head.appendChild(s);
+  },
+  on: function(selector, event, handler) {
+    document.querySelectorAll(selector).forEach(function(el) {
+      el.addEventListener(event, handler);
+    });
+  },
+  attr: function(selector, attrName, value) {
+    document.querySelectorAll(selector).forEach(function(el) {
+      el.setAttribute(attrName, value);
+    });
+  },
+  addClass: function(selector, className) {
+    document.querySelectorAll(selector).forEach(function(el) {
+      el.classList.add(className);
+    });
+  },
+  removeClass: function(selector, className) {
+    document.querySelectorAll(selector).forEach(function(el) {
+      el.classList.remove(className);
+    });
+  }
+};
+
+/* ============================================== */
+/*  ВАШИ ИЗМЕНЕНИЯ — ДОПИСЫВАЙТЕ СЮДА              */
+/*  (каждая строка — отдельное изменение)          */
+/* ============================================== */
+
+// Примеры (удалите или раскомментируйте при необходимости):
+// PATCH.bg('#f5f0e8');
+// PATCH.accent('#556b2f');
+// PATCH.tabColor('#8b4513');
+// PATCH.font('Palatino, serif');
+// PATCH.tab('library', false);
+// PATCH.text('#toggleBtn', 'Раскрыть');
+// PATCH.html('#articles', '<p>Новый текст</p>');
+// PATCH.css('.toggle-btn', 'border-radius:20px;');
+// PATCH.on('#toggleBtn', 'click', function(){ alert('Клик!'); });
+// PATCH.attr('.author-photo', 'src', 'new.jpg');
+// PATCH.addClass('.toggle-btn', 'rounded');
+// PATCH.removeClass('.tab-btn', 'active');
+
 </script>
 </body>
 </html>

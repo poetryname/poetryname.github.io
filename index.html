@@ -638,6 +638,119 @@ const PATCH = {
 /*  (каждая строка — отдельное изменение)          */
 /* ============================================== */
 
+// === SEO: ОПТИМИЗАЦИЯ ДЛЯ ПОИСКОВЫХ СИСТЕМ ===
+
+// Meta description
+(function(){
+  var m = document.createElement('meta');
+  m.name = 'description';
+  m.content = 'Александр Баженов — поэт, писатель, эссеист. Современная поэзия, проза, эссе, очерки. Литературный проект из Екатеринбурга. Стихи о жизни, любви, природе и Родине.';
+  document.head.appendChild(m);
+})();
+
+// Meta keywords
+(function(){
+  var m = document.createElement('meta');
+  m.name = 'keywords';
+  m.content = 'Александр Баженов, Баженов Александр, Баженов Александр Сергеевич, поэзия, стихи, современная поэзия, литература, современные авторы, проза, эссе, очерки, поэт, писатель, эссеист, Екатеринбург, русская поэзия, современная литература, авторский сайт, литературный проект, стихи о любви, стихи о родине, стихи о природе';
+  document.head.appendChild(m);
+})();
+
+// Meta author
+(function(){
+  var m = document.createElement('meta');
+  m.name = 'author';
+  m.content = 'Александр Баженов';
+  document.head.appendChild(m);
+})();
+
+// Meta robots
+(function(){
+  var m = document.createElement('meta');
+  m.name = 'robots';
+  m.content = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+  document.head.appendChild(m);
+})();
+
+// Open Graph (для соцсетей и поисковиков)
+(function(){
+  var tags = {
+    'og:title': 'Александр Баженов — поэт, писатель, эссеист',
+    'og:description': 'Современная поэзия, проза, эссе и очерки. Литературный проект Александра Баженова из Екатеринбурга.',
+    'og:type': 'website',
+    'og:locale': 'ru_RU',
+    'og:site_name': 'Литературный уголок',
+    'article:author': 'Александр Баженов'
+  };
+  Object.keys(tags).forEach(function(key){
+    var m = document.createElement('meta');
+    m.setAttribute('property', key);
+    m.content = tags[key];
+    document.head.appendChild(m);
+  });
+})();
+
+// JSON-LD: данные об авторе (для Google, Yandex)
+(function(){
+  var s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    'name': 'Александр Баженов',
+    'givenName': 'Александр',
+    'familyName': 'Баженов',
+    'jobTitle': 'поэт, писатель, эссеист',
+    'address': {
+      '@type': 'PostalAddress',
+      'addressLocality': 'Екатеринбург',
+      'addressRegion': 'Свердловская область',
+      'addressCountry': 'RU'
+    },
+    'description': 'Поэт, писатель, эссеист. Автор стихов о жизни, любви, природе и Родине.',
+    'knowsAbout': ['поэзия', 'стихи', 'современная поэзия', 'литература', 'проза', 'эссе', 'очерки']
+  });
+  document.head.appendChild(s);
+})();
+
+// JSON-LD: данные о сайте
+(function(){
+  var s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    'name': 'Литературный уголок',
+    'description': 'Литературный проект и авторский сайт Александра Баженова — поэта, писателя, эссеиста.',
+    'inLanguage': 'ru',
+    'author': {
+      '@type': 'Person',
+      'name': 'Александр Баженов'
+    }
+  });
+  document.head.appendChild(s);
+})();
+
+// JSON-LD: список произведений
+(function(){
+  var s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    'name': 'Литературный уголок — Александр Баженов',
+    'description': 'Сборник стихов, прозы, эссе и очерков современного автора Александра Баженова.',
+    'inLanguage': 'ru',
+    'hasPart': [
+      {'@type': 'Article', 'name': 'Стихи', 'author': {'@type': 'Person', 'name': 'Александр Баженов'}},
+      {'@type': 'Article', 'name': 'Фотоальбом «Родная земля»', 'author': {'@type': 'Person', 'name': 'Александр Баженов'}},
+      {'@type': 'Article', 'name': 'Любовь одиноких птиц', 'author': {'@type': 'Person', 'name': 'Александр Баженов'}},
+      {'@type': 'Article', 'name': 'Город, подаривший мне крылья', 'author': {'@type': 'Person', 'name': 'Александр Баженов'}},
+      {'@type': 'Article', 'name': 'Прозрачные цепи', 'author': {'@type': 'Person', 'name': 'Александр Баженов'}}
+    ]
+  });
+  document.head.appendChild(s);
+})();
 // Примеры (удалите или раскомментируйте при необходимости):
 // PATCH.bg('#f5f0e8');
 // PATCH.accent('#556b2f');

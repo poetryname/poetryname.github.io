@@ -584,3 +584,20 @@ expanded = false;
 </body>
 </html>
 
+/* ============================================== */
+/*  ВАШИ ИЗМЕНЕНИЯ — ДОПИСЫВАЙТЕ СЮДА              */
+/*  (каждая строка — отдельное изменение)          */
+/* ============================================== */
+
+// 1. Строгие поля для прозы и статей
+PATCH.css('#prose, #articles', 'max-width: 680px; margin: 40px auto; padding: 0 16px; box-sizing: border-box;');
+PATCH.css('#prose p, #articles p', 'line-height: 1.8; text-align: left; hyphens: auto; margin-bottom: 24px;');
+PATCH.css('#prose h3, #articles h3', 'margin-top: 36px; margin-bottom: 16px; font-size: 1.4rem;');
+
+// 2. Фикс кнопки — скрываем активную секцию при загрузке
+var activeSection = document.querySelector('.section-content.active');
+if (activeSection) {
+  activeSection.style.display = 'none';
+}
+
+</script>

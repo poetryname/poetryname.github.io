@@ -133,6 +133,34 @@ text-align: center;
 padding: 40px 0;
 color: #777;
 font-size: 0.9rem;
+}       
+
+/* Строгие поля для прозы — текст в аккуратном столбце */
+#prose {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+#prose p {
+  line-height: 1.8;
+  text-align: left;
+  margin-bottom: 18px;
+  hyphens: auto;
+}
+
+#prose h3 {
+  margin-top: 36px;
+  margin-bottom: 16px;
+  font-size: 1.4rem;
+}
+
+@media (max-width: 600px) {
+  #prose {
+    max-width: none;
+    padding: 16px 12px;
+  }
 }
 </style>
 </head>

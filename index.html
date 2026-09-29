@@ -161,6 +161,80 @@ font-size: 0.9rem;
     max-width: none;
     padding: 16px 12px;
   }
+}/* Статьи — те же поля, что у прозы */
+#articles {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+#articles p {
+  line-height: 1.8;
+  text-align: left;
+  margin-bottom: 18px;
+  hyphens: auto;
+}
+
+#articles h3 {
+  margin-top: 36px;
+  margin-bottom: 16px;
+  font-size: 1.4rem;
+}
+
+#articles .article-subtitle {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+#articles .toc {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 32px;
+  counter-reset: toc;
+}
+
+#articles .toc li {
+  margin-bottom: 8px;
+  counter-increment: toc;
+}
+
+#articles .toc li::before {
+  content: counter(toc) ". ";
+  color: #8b4513;
+  font-weight: bold;
+}
+
+#articles .toc a {
+  color: #8b4513;
+  text-decoration: none;
+}
+
+#articles .toc a:hover {
+  text-decoration: underline;
+}
+
+#articles .article-poem {
+  max-width: 600px;
+  margin: 24px auto;
+  padding: 16px 20px;
+  background: #faf8f5;
+  border-left: 3px solid #8b4513;
+  line-height: 1.6;
+}
+
+#articles .article-poem p {
+  margin: 0;
+  text-align: left;
+  hyphens: none;
+}
+
+@media (max-width: 600px) {
+  #articles {
+    max-width: none;
+    padding: 16px 12px;
+  }
 }
 </style>
 </head>

@@ -643,39 +643,27 @@ header {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const sections = document.querySelectorAll('.section-content');
 
-    sections.forEach(section => {
-      const textWrap = document.createElement('div');
-      textWrap.className = 'section-text';
-      while (section.firstChild) {
-        textWrap.appendChild(section.firstChild);
-      }
-      textWrap.style.display = 'none';
-      section.appendChild(textWrap);
-
-      const btn = document.createElement('button');
-      btn.className = 'toggle-btn';
-      btn.textContent = 'Читать дальше';
-
-      btn.addEventListener('click', () => {
-        if (textWrap.style.display === 'none') {
-          textWrap.style.display = 'block';
-          btn.textContent = 'Свернуть';
-        } else {
-          textWrap.style.display = 'none';
-          btn.textContent = 'Читать дальше';
-        }
-      });
-
-      section.appendChild(btn);
-    });
-
     tabButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        tabButtons.forEach(b => b.classList.remove('active'));
-        sections.forEach(s => s.classList.remove('active'));
-        btn.classList.add('active');
-        const target = document.getElementById(btn.getAttribute('data-target'));
-        if (target) target.classList.add('active');
+        const targetId = btn.getAttribute('data-target');
+        const targetSection = document.getElementById(targetId);
+
+        // Если вкладка уже активна — закрываем её
+        if (btn.classList.contains('active')) {
+          btn.classList.remove('active');
+          if (targetSection) {
+            targetSection.classList.remove('active');
+          }
+        }
+        // Если активна другая вкладка — закрываем её и открываем эту
+        else {
+          tabButtons.forEach(b => b.classList.remove('active'));
+          sections.forEach(s => s.classList.remove('active'));
+          btn.classList.add('active');
+          if (targetSection) {
+            targetSection.classList.add('active');
+          }
+        }
       });
     });
   });

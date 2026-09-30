@@ -224,6 +224,71 @@ font-size: 0.9rem;
       top: 10vh;
     }
   }
+  /* Центрируем шапку и убираем наезды */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  padding: 0;
+}
+
+/* Фото в шапке — фиксированный размер, без вылезания */
+header img,
+header .avatar {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+/* Панель меню в шапке — ровно под фото, без наездов */
+header .nav-panel,
+header .menu-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 12px;
+}
+
+/* Убираем любые абсолютные смещения, которые могли вызывать наезды */
+header * {
+  position: static !important;
+}
+
+/* Крупнее шрифты — база и медиа-запросы */
+body {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  body, p, li, span, div {
+    font-size: 1.1rem !important;
+  }
+  h1, h2, h3 {
+    font-size: 1.3rem !important;
+  }
+  header {
+    margin-top: 24px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 769px) {
+  body, p, li, span, div {
+    font-size: 1rem !important;
+  }
+  h1, h2, h3 {
+    font-size: 1.2rem !important;
+  }
+}
 </style>
 </head>
 <body>

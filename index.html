@@ -46,26 +46,44 @@
     "name": "Александр Баженов"
   }
 }
-</script><style>
+</script>
+<style>
 body {
-font-family: Georgia, serif;
-line-height: 1.7;
-color: #1a1a1a;
-background: #f9f9f7;
-margin: 0;
-padding: 0 16px;
+  font-family: Georgia, serif;
+  line-height: 1.7;
+  color: #1a1a1a;
+  background: #f9f9f7;
+  margin: 0;
+  padding: 0 16px;
 }
 
-header {<section style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);" aria-hidden="true">
+/* Удаление кнопки «Читать дальше» */
+.read-more-btn {
+  display: none;
+}
+
+/* Приведение шрифта к размеру футера */
+body, p, li, span, div, h1, h2, h3 {
+  font-size: 0.9rem !important;
+}
+
+/* Сдвиг шапки ближе к середине */
+header {
+  position: relative;
+  top: 15vh;
+  padding: 40px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+</head>
+<body>
+
+<section style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);" aria-hidden="true">
   <h1>Александр Баженов — поэт, писатель, эссеист. Современная поэзия и литература</h1>
   <p>Литературный проект Александра Баженова (Баженов Александр Сергеевич) из Екатеринбурга. Авторская современная поэзия: стихи о жизни, любви, природе, Родине. Проза: рассказы и эссе. Статьи о современной поэзии: Иосиф Бродский, Борис Рыжий, Николай Зиновьев, Константин Комаров, Алексей Решетов, Сергей Гандлевский, Александр Сопровский, Николай Рубцов, Валерий Капленко. Русская поэзия, современная литература, авторский сайт.</p>
 </section>
-padding: 40px 0; /* одинаковый отступ сверху и до панели */
-position: relative;
-display: flex;
-align-items: center;
-justify-content: center; /* центрируем содержимое хедера */
-}
 /* Контейнер для прозы и статей — строгий столбец */
 #prose, #articles {
   max-width: 680px;          /* жёсткий предел ширины */

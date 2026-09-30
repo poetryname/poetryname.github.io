@@ -46,44 +46,26 @@
     "name": "Александр Баженов"
   }
 }
-</script>
-<style>
+</script><style>
 body {
-  font-family: Georgia, serif;
-  line-height: 1.7;
-  color: #1a1a1a;
-  background: #f9f9f7;
-  margin: 0;
-  padding: 0 16px;
+font-family: Georgia, serif;
+line-height: 1.7;
+color: #1a1a1a;
+background: #f9f9f7;
+margin: 0;
+padding: 0 16px;
 }
 
-/* Удаление кнопки «Читать дальше» */
-.read-more-btn {
-  display: none;
-}
-
-/* Приведение шрифта к размеру футера */
-body, p, li, span, div, h1, h2, h3 {
-  font-size: 0.9rem !important;
-}
-
-/* Сдвиг шапки ближе к середине */
-header {
-  position: relative;
-  top: 15vh;
-  padding: 40px 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-</style>
-</head>
-<body>
-
-<section style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);" aria-hidden="true">
+header {<section style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);" aria-hidden="true">
   <h1>Александр Баженов — поэт, писатель, эссеист. Современная поэзия и литература</h1>
   <p>Литературный проект Александра Баженова (Баженов Александр Сергеевич) из Екатеринбурга. Авторская современная поэзия: стихи о жизни, любви, природе, Родине. Проза: рассказы и эссе. Статьи о современной поэзии: Иосиф Бродский, Борис Рыжий, Николай Зиновьев, Константин Комаров, Алексей Решетов, Сергей Гандлевский, Александр Сопровский, Николай Рубцов, Валерий Капленко. Русская поэзия, современная литература, авторский сайт.</p>
 </section>
+padding: 40px 0; /* одинаковый отступ сверху и до панели */
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center; /* центрируем содержимое хедера */
+}
 /* Контейнер для прозы и статей — строгий столбец */
 #prose, #articles {
   max-width: 680px;          /* жёсткий предел ширины */
@@ -212,56 +194,10 @@ box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 footer {
-
-/* Адаптивный размер шрифта */
-body {
-  font-size: 18px !important;
-}
-
-p, li, span, div {
-  font-size: 18px !important;
-}
-
-h1 {
-  font-size: 2.5rem !important;
-}
-
-h2 {
-  font-size: 1.8rem !important;
-}
-
-h3 {
-  font-size: 1.4rem !important;
-}
-
-/* На телефонах — ещё крупнее */
-@media (max-width: 768px) {
-  body {
-    font-size: 20px !important;
-  }
-  p, li, span, div {
-    font-size: 20px !important;
-  }
-  h1 {
-    font-size: 2.8rem !important;
-  }
-}
-
-/* Шапка: чуть ниже и крупнее */
-header {
-  padding-top: 40px;
-  padding-bottom: 20px;
-}
-
-/* Поля для текста */
-.section-content {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-.section-content p {
-  margin-bottom: 1em;
+text-align: center;
+padding: 40px 0;
+color: #777;
+font-size: 0.9rem;
 }
 </style>
 </head>
@@ -657,34 +593,68 @@ header {
 </footer>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const sections = document.querySelectorAll('.section-content');
+const buttons = document.querySelectorAll('.tab-btn');
+const contents = document.querySelectorAll('.section-content');
+const toggleBtn = document.getElementById('toggleBtn');
+let expanded = false;
 
-    tabButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetId = btn.getAttribute('data-target');
-        const targetSection = document.getElementById(targetId);
+buttons.forEach(btn => {
+btn.addEventListener('click', () => {
+buttons.forEach(b => b.classList.remove('active'));
+contents.forEach(c => c.classList.remove('active'));
+btn.classList.add('active');
+document.getElementById(btn.getAttribute('data-target')).classList.add('active');
 
-        // Если вкладка уже активна — закрываем её
-        if (btn.classList.contains('active')) {
-          btn.classList.remove('active');
-          if (targetSection) {
-            targetSection.classList.remove('active');
-          }
-        }
-        // Если активна другая вкладка — закрываем её и открываем эту
-        else {
-          tabButtons.forEach(b => b.classList.remove('active'));
-          sections.forEach(s => s.classList.remove('active'));
-          btn.classList.add('active');
-          if (targetSection) {
-            targetSection.classList.add('active');
-          }
+expanded = false;
+contents.forEach(c => c.style.display = 'none');
+toggleBtn.textContent = 'Читать дальше';
+});
+});
+
+toggleBtn.addEventListener('click', () => {
+const activeSection = document.querySelector('.section-content.active');
+if (!activeSection) return;
+
+if (!expanded) {
+activeSection.style.display = 'block';
+toggleBtn.textContent = 'Свернуть';
+expanded = true;
+} else {
+activeSection.style.display = 'none';
+toggleBtn.textContent = 'Читать дальше';
+expanded = false;
+}
+});
+</script>
+</body>
+</html>
+  <script>
+    var toggleBtn = document.getElementById('toggleBtn');
+    var activeSection = document.querySelector('.section-content.active');
+    var expanded = false;
+
+    // При загрузке скрываем активную секцию, чтобы кнопка реально раскрывала текст с первого клика
+    if (activeSection) {
+      activeSection.style.display = 'none';
+    }
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', function() {
+        var section = document.querySelector('.section-content.active');
+        if (!section) return;
+
+        if (!expanded) {
+          section.style.display = 'block';
+          toggleBtn.textContent = 'Свернуть';
+          expanded = true;
+        } else {
+          section.style.display = 'none';
+          toggleBtn.textContent = 'Читать дальше';
+          expanded = false;
         }
       });
-    });
-  });
-</script>
+    }
+  </script>
+
 </body>
 </html>

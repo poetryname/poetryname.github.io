@@ -612,54 +612,46 @@ header h1, header .site-title {
 <p>&copy; Литературный сайт. Все права принадлежат автору.</p>
 </footer>
 
-
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.tab-btn');
-    const contents = document.querySelectorAll('.section-content');
-    const toggleBtn = document.getElementById('toggleBtn');
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const sections = document.querySelectorAll('.section-content');
 
-    let expanded = false;
-    let activeSection = null;
+    sections.forEach(section => {
+      const textWrap = document.createElement('div');
+      textWrap.className = 'section-text';
+      while (section.firstChild) {
+        textWrap.appendChild(section.firstChild);
+      }
+      textWrap.style.display = 'none';
+      section.appendChild(textWrap);
 
-    buttons.forEach(btn => {
+      const btn = document.createElement('button');
+      btn.className = 'toggle-btn';
+      btn.textContent = 'Читать дальше';
+
       btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        contents.forEach(c => c.classList.remove('active'));
-
-        btn.classList.add('active');
-        const targetId = btn.getAttribute('data-target');
-        const targetSection = document.getElementById(targetId);
-        if (targetSection) {
-          targetSection.classList.add('active');
-          activeSection = targetSection;
-        }
-
-        expanded = false;
-        if (activeSection) {
-          activeSection.style.display = 'none';
-        }
-        if (toggleBtn) {
-          toggleBtn.textContent = 'Читать дальше';
+        if (textWrap.style.display === 'none') {
+          textWrap.style.display = 'block';
+          btn.textContent = 'Свернуть';
+        } else {
+          textWrap.style.display = 'none';
+          btn.textContent = 'Читать дальше';
         }
       });
+
+      section.appendChild(btn);
     });
 
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', () => {
-        if (!activeSection) return;
-
-        if (!expanded) {
-          activeSection.style.display = 'block';
-          toggleBtn.textContent = 'Свернуть';
-          expanded = true;
-        } else {
-          activeSection.style.display = 'none';
-          toggleBtn.textContent = 'Читать дальше';
-          expanded = false;
-        }
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        const target = document.getElementById(btn.getAttribute('data-target'));
+        if (target) target.classList.add('active');
       });
-    }
+    });
   });
 </script>
 </body>

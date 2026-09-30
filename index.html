@@ -194,30 +194,56 @@ box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 footer {
-text-align: center;
-padding: 40px 0;
-color: #777;
-font-size: 0.9rem;
-}/* Адаптивный размер шрифта */
+
+/* Адаптивный размер шрифта */
 body {
-  font-size: 16px; /* базовый размер для десктопа */
+  font-size: 18px !important;
 }
 
-/* На телефонах шрифт на 2 кегля больше */
+p, li, span, div {
+  font-size: 18px !important;
+}
+
+h1 {
+  font-size: 2.5rem !important;
+}
+
+h2 {
+  font-size: 1.8rem !important;
+}
+
+h3 {
+  font-size: 1.4rem !important;
+}
+
+/* На телефонах — ещё крупнее */
 @media (max-width: 768px) {
   body {
-    font-size: 18px;
+    font-size: 20px !important;
+  }
+  p, li, span, div {
+    font-size: 20px !important;
+  }
+  h1 {
+    font-size: 2.8rem !important;
   }
 }
 
 /* Шапка: чуть ниже и крупнее */
 header {
-  padding-top: 40px;       /* отступ сверху, чтобы не прилипала к краю */
+  padding-top: 40px;
   padding-bottom: 20px;
 }
 
-header h1, header .site-title {
-  font-size: 2rem;         /* примерно на 15–20% крупнее обычного */
+/* Поля для текста */
+.section-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.section-content p {
+  margin-bottom: 1em;
 }
 </style>
 </head>

@@ -199,6 +199,30 @@ padding: 40px 0;
 color: #777;
 font-size: 0.9rem;
 }
+  /* Шрифт крупнее на телефонах */
+  @media (max-width: 768px) {
+    body, p, li, span, div {
+      font-size: 1.05rem !important;
+    }
+    h1, h2, h3 {
+      font-size: 1.2rem !important;
+    }
+    header {
+      top: 12vh;
+    }
+  }
+  /* Шрифт чуть крупнее на компьютерах */
+  @media (min-width: 769px) {
+    body, p, li, span, div {
+      font-size: 0.95rem !important;
+    }
+    h1, h2, h3 {
+      font-size: 1.1rem !important;
+    }
+    header {
+      top: 10vh;
+    }
+  }
 </style>
 </head>
 <body>

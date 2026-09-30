@@ -198,6 +198,26 @@ text-align: center;
 padding: 40px 0;
 color: #777;
 font-size: 0.9rem;
+}/* Адаптивный размер шрифта */
+body {
+  font-size: 16px; /* базовый размер для десктопа */
+}
+
+/* На телефонах шрифт на 2 кегля больше */
+@media (max-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+/* Шапка: чуть ниже и крупнее */
+header {
+  padding-top: 40px;       /* отступ сверху, чтобы не прилипала к краю */
+  padding-bottom: 20px;
+}
+
+header h1, header .site-title {
+  font-size: 2rem;         /* примерно на 15–20% крупнее обычного */
 }
 </style>
 </head>

@@ -46,7 +46,8 @@
     "name": "Александр Баженов"
   }
 }
-</script><style>
+</script>
+<style>
 body {
 font-family: Georgia, serif;
 line-height: 1.7;
@@ -56,16 +57,13 @@ margin: 0;
 padding: 0 16px;
 }
 
-header {<section style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);" aria-hidden="true">
-  <h1>Александр Баженов — поэт, писатель, эссеист. Современная поэзия и литература</h1>
-  <p>Литературный проект Александра Баженова (Баженов Александр Сергеевич) из Екатеринбурга. Авторская современная поэзия: стихи о жизни, любви, природе, Родине. Проза: рассказы и эссе. Статьи о современной поэзии: Иосиф Бродский, Борис Рыжий, Николай Зиновьев, Константин Комаров, Алексей Решетов, Сергей Гандлевский, Александр Сопровский, Николай Рубцов, Валерий Капленко. Русская поэзия, современная литература, авторский сайт.</p>
-</section>
-padding: 40px 0; /* одинаковый отступ сверху и до панели */
+header {
+padding: 40px 0 20px 0; /* отступ сверху и небольшой снизу до панели */
 position: relative;
 display: flex;
 align-items: center;
 justify-content: center; /* центрируем содержимое хедера */
-margin-top: 15vh;       
+margin-top: 15vh;
 }
 /* Контейнер для прозы и статей — строгий столбец */
 #prose, #articles {
@@ -109,7 +107,7 @@ max-width: 560px;
 }
 
 nav {
-margin: 40px 0; /* такой же отступ, как у header сверху — линия ровная */
+margin: 20px 0; /* небольшой ровный отступ между шапкой и панелью */
 overflow-x: auto;
 }
 
@@ -208,9 +206,6 @@ font-size: 0.9rem;
     h1, h2, h3 {
       font-size: 1.2rem !important;
     }
-    header {
-      top: 12vh;
-    }
   }
   /* Шрифт чуть крупнее на компьютерах */
   @media (min-width: 769px) {
@@ -220,75 +215,7 @@ font-size: 0.9rem;
     h1, h2, h3 {
       font-size: 1.1rem !important;
     }
-    header {
-      top: 10vh;
-    }
   }
-  /* Центрируем шапку и убираем наезды */
-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 30px;
-  padding: 0;
-}
-
-/* Фото в шапке — фиксированный размер, без вылезания */
-header img,
-header .avatar {
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 16px;
-}
-
-/* Панель меню в шапке — ровно под фото, без наездов */
-header .nav-panel,
-header .menu-bar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 800px;
-  margin-top: 12px;
-}
-
-/* Убираем любые абсолютные смещения, которые могли вызывать наезды */
-header * {
-  position: static !important;
-}
-
-/* Крупнее шрифты — база и медиа-запросы */
-body {
-  font-size: 16px;
-}
-
-@media (max-width: 768px) {
-  body, p, li, span, div {
-    font-size: 1.1rem !important;
-  }
-  h1, h2, h3 {
-    font-size: 1.3rem !important;
-  }
-  header {
-    margin-top: 24px;
-    margin-bottom: 20px;
-  }
-}
-
-@media (min-width: 769px) {
-  body, p, li, span, div {
-    font-size: 1rem !important;
-  }
-  h1, h2, h3 {
-    font-size: 1.2rem !important;
-  }
-}
 </style>
 </head>
 <body>

@@ -245,6 +245,8 @@ font-size: 0.9rem;
 <button class="tab-btn" data-target="library">Библиотека публикаций</button>
 <!-- Новая кнопка -->
 <!-- Новая кнопка -->
+<button class="tab-btn" data-target="services">Услуги</button>
+<button class="tab-btn" data-target="contacts">Контакты</button>  
 </div>
 </nav>
 
@@ -1717,44 +1719,49 @@ font-size: 0.9rem;
 <p>Здесь будет библиотека публикаций.</p>
 </div>
 
+<!-- ===== Контакты ===== -->
+<div id="contacts" class="section-content" style="display: none;">
+  <p>Вы можете связаться со мной любым удобным способом:</p>
+
+  <p><strong>Телефоны:</strong></p>
+  <ul>
+    <li><a href="tel:+79521432857">+7 952 143-28-57</a></li>
+    <li><a href="tel:+79530551217">+7 953 055-12-17</a></li>
+  </ul>
+
+  <p><strong>Email:</strong></p>
+  <ul>
+    <li><a href="mailto:Aleksandr.Sergeevich.Bazhenov@yandex.ru">Aleksandr.Sergeevich.Bazhenov@yandex.ru</a></li>
+    <li><a href="mailto:bajenov.sanya2016@yandex.ru">bajenov.sanya2016@yandex.ru</a></li>
+  </ul>
+
+  <p><strong>Творческая страница в ВК:</strong></p>
+  <ul>
+    <li><a href="https://vk.com/uralpoems" target="_blank" rel="noopener noreferrer">https://vk.com/uralpoems</a></li>
+  </ul>
+
+  <p>Пишите о предложениях и вопросах по литературному проекту.</p>
+</div>
+<!-- Конец блока Контакты -->
+  
+<!-- ===== Услуги ===== -->
+  <div id="services" class="section-content">
+    <div class="prose-block" style="max-width: 800px; margin-left: auto; margin-right: auto; text-align: left;">
+     <h2 style="text-align: left; margin-top: 0;">Услуги</h2>
+      <p>• Разработка сайтов — создание и настройка сайтов под литературные проекты, включая адаптацию под мобильные устройства и базовую SEO-оптимизацию.</p>
+      <p>• Копирайтинг — написание текстов для сайтов, постов, анонсов, описаний проектов и других материалов в подходящем стиле.</p>
+      <p>• Редактирование и написание текстов — правка прозы и поэзии, работа с композицией, стилем, лексикой и грамматикой, а также создание текстов по заданию.</p>
+      <p>• Оценка и анализ текстов — разбор стихотворений и прозаических произведений: выявление смысловых разрывов, оценка композиции, подбор вариантов правки.</p>
+    </div>
+  </div>
+
 </main>
 
-<footer style="margin-top: 40px;">
+<footer>
   <p style="text-align: center; margin: 0 0 12px 0;">&copy; Литературный сайт. Все права принадлежат автору.</p>
-  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; max-width: 800px; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
-    <div style="flex: 1; text-align: left;">
-      <button class="tab-btn" data-target="services">Услуги</button>
-      <div id="services" class="section-content">
-        <div class="prose-block" style="max-width: 800px; margin-left: auto; margin-right: auto; text-align: left;">
-          <h2 style="text-align: left; margin-top: 0;">Услуги</h2>
-          <p>• Разработка сайтов — создание и настройка сайтов под литературные проекты, включая адаптацию под мобильные устройства и базовую SEO-оптимизацию.</p>
-          <p>• Копирайтинг — написание текстов для сайтов, постов, анонсов, описаний проектов и других материалов в подходящем стиле.</p>
-          <p>• Редактирование и написание текстов — правка прозы и поэзии, работа с композицией, стилем, лексикой и грамматикой, а также создание текстов по заданию.</p>
-          <p>• Оценка и анализ текстов — разбор стихотворений и прозаических произведений: выявление смысловых разрывов, оценка композиции, подбор вариантов правки.</p>
-        </div>
-      </div>
-    </div>
-    <div style="flex: 1; text-align: right;">
-      <button class="tab-btn" data-target="contacts">Контакты</button>
-      <div id="contacts" class="section-content">
-        <p>Вы можете связаться со мной любым удобным способом:</p>
-        <p><strong>Телефоны:</strong></p>
-        <ul>
-          <li><a href="tel:+79521432857">+7 952 143-28-57</a></li>
-          <li><a href="tel:+79530551217">+7 953 055-12-17</a></li>
-        </ul>
-        <p><strong>Email:</strong></p>
-        <ul>
-          <li><a href="mailto:Aleksandr.Sergeevich.Bazhenov@yandex.ru">Aleksandr.Sergeevich.Bazhenov@yandex.ru</a></li>
-          <li><a href="mailto:bajenov.sanya2016@yandex.ru">bajenov.sanya2016@yandex.ru</a></li>
-        </ul>
-        <p><strong>Творческая страница в ВК:</strong></p>
-        <ul>
-          <li><a href="https://vk.com/uralpoems" target="_blank" rel="noopener noreferrer">https://vk.com/uralpoems</a></li>
-        </ul>
-        <p>Пишите о предложениях и вопросах по литературному проекту.</p>
-      </div>
-    </div>
+  <div style="display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
+    <button class="tab-btn" data-target="services" style="all: unset; cursor: pointer; font: inherit;">Услуги</button>
+    <button class="tab-btn" data-target="contacts" style="all: unset; cursor: pointer; font: inherit;">Контакты</button>
   </div>
 </footer>
 

@@ -386,6 +386,63 @@ section > div:not([class]) {
 .poems div {
     background: transparent;
   }
+  /* === Сплошные белые панели: «К читателю», «Проза», «Контакты» === */
+
+/* Все безымянные абзацы после заголовков — на одной панели, без зазоров */
+h2 ~ p:not([class]),
+h3 ~ p:not([class]) {
+    margin: 0;
+    padding: 0.7em 1.5em;
+    border-radius: 0;
+  }
+
+/* Верх панели: первый абзац после заголовка */
+h2 + p:not([class]),
+h2 ~ p:not([class]):first-of-type,
+h3 + p:not([class]) {
+    padding-top: 1.5em;
+    border-radius: 12px 12px 0 0;
+  }
+
+/* Низ панели: последний абзац раздела */
+h2 ~ p:not([class]):last-of-type,
+h3 ~ p:not([class]):last-of-type {
+    padding-bottom: 1.5em;
+    border-radius: 0 0 12px 12px;
+  }
+
+/* Если в разделе один абзац — скруглены все четыре угла */
+h2 ~ p:not([class]):first-of-type:last-of-type,
+h3 ~ p:not([class]):first-of-type:last-of-type {
+    border-radius: 12px;
+  }
+
+/* === Проза: зазоры в подложке только между произведениями === */
+
+/* 1) Абзацы внутри произведения — сплошная панель, без зазоров */
+h2 ~ p:not([class]),
+h3 ~ p:not([class]) {
+    margin: 0;
+    padding: 0.7em 1.5em;
+    border-radius: 0;
+  }
+
+/* 2) Строки-названия произведений — прозрачные, с воздухом вокруг */
+p:has(> strong),
+p:has(> b) {
+    background: transparent;
+    padding: 0;
+    margin: 1.5em 0 0.8em;
+  }
+
+/* 3) На случай, если произведения разделены пустой строкой или чертой */
+p:empty,
+hr {
+    background: transparent;
+    border: none;
+    margin: 1.2em 0;
+    padding: 0;
+  }
 </style>
 </head>
 <body>

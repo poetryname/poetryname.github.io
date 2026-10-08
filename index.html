@@ -299,26 +299,28 @@ article {
     padding: 1em;
   }
   
-  /* === Сплошные белые панели с скруглениями: «К читателю», «Проза», «Контакты»: сплошная панель, обнимающая каждую строку === */
+  /* === Сплошные белые панели: «К читателю», «Проза», «Контакты» === */
 
+/* Все безымянные абзацы после заголовков — на одной панели, без зазоров */
 h2 ~ p:not([class]),
 h3 ~ p:not([class]) {
-    width: fit-content;
-    max-width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 0.7em 1.5em;
     margin: 0;
+    padding: 0.7em 1.5em;
+    border-radius: 0;
   }
 
-/* Верх и низ общей панели скруглены, внутри — без скруглений */
+/* Верх панели: первый абзац после заголовка */
+h2 + p:not([class]),
 h2 ~ p:not([class]):first-of-type,
-h3 ~ p:not([class]):first-of-type {
+h3 + p:not([class]) {
+    padding-top: 1.5em;
     border-radius: 12px 12px 0 0;
   }
 
+/* Низ панели: последний абзац раздела */
 h2 ~ p:not([class]):last-of-type,
 h3 ~ p:not([class]):last-of-type {
+    padding-bottom: 1.5em;
     border-radius: 0 0 12px 12px;
   }
 
@@ -326,18 +328,6 @@ h3 ~ p:not([class]):last-of-type {
 h2 ~ p:not([class]):first-of-type:last-of-type,
 h3 ~ p:not([class]):first-of-type:last-of-type {
     border-radius: 12px;
-  }
-
-/* Строки списков (как в «Услугах») — в той же панели, без просветов */
-h2 ~ ul:not([class]) li,
-h2 ~ ol:not([class]) li,
-h3 ~ ul:not([class]) li,
-h3 ~ ol:not([class]) li {
-    width: fit-content;
-    max-width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 0.7em 1.5em;
-    margin: 0;
   }
   
 .content {

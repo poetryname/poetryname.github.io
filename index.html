@@ -1901,107 +1901,52 @@ font-size: 0.9rem;
         </div>
     </div>
 </div>
-  
-<!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <title>Очерки</title>
-    <style>
-      /* ===== Общие стили страницы ===== */
-      body {
-        font-family: Georgia, 'Times New Roman', serif;
-        font-size: 1rem;
-        line-height: 1.7;
-        color: #222;
-        background: #fff;
-        margin: 0;
-        padding: 0;
-      }
 
-      /* ===== Разделы: границы блока — по центру, текст — по левому краю ===== */
-      .section-content {
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 0 20px;
-        text-align: left;
-      }
+<!-- ===== Очерки ===== -->
+<style>
+  .essay-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: left;
+  }
 
-      .section-content h1 {
-        font-size: 1.8rem;
-        text-align: center;
-        margin: 0 0 25px;
-      }
+  .essay-section h1 { font-size: 1.8rem; text-align: center; margin: 0 0 25px; }
+  .essay-section h3 { font-size: 1.2rem; margin: 30px 0 12px; }
 
-      .section-content h2 {
-        font-size: 1.4rem;
-        margin: 35px 0 15px;
-      }
+  .essay-section p {
+    line-height: 1.7;
+    margin: 0 0 12px;
+    text-indent: 1.5em;
+  }
+  .essay-section p.no-indent { text-indent: 0; }
 
-      .section-content h3 {
-        font-size: 1.2rem;
-        margin: 30px 0 12px;
-      }
+  .essay-section blockquote {
+    margin: 20px 0;
+    font-style: italic;
+    color: #444;
+    padding-left: 1em;
+    border-left: 3px solid #ccc;
+  }
 
-      .section-content p {
-        font-size: 1rem;
-        line-height: 1.7;
-        margin: 0 0 12px;
-        text-align: left;
-        text-indent: 1.5em;
-      }
+  .toc a { color: #0000ee; text-decoration: underline; }
+  .toc a:hover { color: #0000cc; }
 
-      .section-content p.no-indent {
-        text-indent: 0;
-      }
+  @media (max-width: 600px) {
+    .essay-section { padding: 0 15px; max-width: 100%; }
+  }
+</style>
 
-      /* Цитата — с аккуратной левой линией */
-      .section-content blockquote {
-        margin: 20px 0;
-        font-style: italic;
-        color: #444;
-        padding-left: 1em;
-        border-left: 3px solid #ccc;
-      }
-
-      /* Содержание: активные синие строки */
-      .toc {
-        margin: 0 auto 40px;
-      }
-
-      .toc a {
-        color: #0000ee;
-        text-decoration: underline;
-      }
-
-      .toc a:hover,
-      .toc a:active {
-        color: #0000cc;
-        text-decoration: underline;
-      }
-
-      .toc ol {
-        margin: 10px 0 0;
-        padding-left: 1.5em;
-      }
-
-      .toc li {
-        margin-bottom: 8px;
-      }
-
-      /* Адаптивность */
-      @media (max-width: 600px) {
-        .section-content {
-          padding: 0 15px;
-          max-width: 100%;
-        }
-        .section-content h1 { font-size: 1.5rem; }
-        .section-content h2 { font-size: 1.25rem; }
-        .section-content h3 { font-size: 1.1rem; }
-      }
-    </style>
-  </head>
-  <body>
+<!-- ==================== СОДЕРЖАНИЕ ==================== -->
+<div class="essay-section toc" id="soderzhanie">
+  <h1>Содержание</h1>
+  <ol>
+    <li><a href="#opyt-seminarov">Опыт семинаров</a></li>
+    <li><a href="#krasnaya-stroka">Красная строка</a></li>
+    <li><a href="#uralskie-nedra">Уральские недра (цикл очерков)</a></li>
+    <li><a href="#ognennye-bryzgi">Огненные брызги. Тревожные и весёлые истории о детстве</a></li>
+  </ol>
+</div>
 
     <!-- ==================== СОДЕРЖАНИЕ ==================== -->
     <div class="section-content toc" id="soderzhanie">

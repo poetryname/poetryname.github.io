@@ -336,6 +336,24 @@ nav {
     -webkit-mask-image: linear-gradient(to top, black, transparent);
     mask-image: linear-gradient(to top, black, transparent);
   }
+  
+/* === Белые подложки: «К читателю», «Проза», «Контакты» === */
+h2 ~ p:not([class]),
+h3 ~ p:not([class]),
+h2 ~ div:not([class]),
+h3 ~ div:not([class]),
+section > p:not([class]),
+section > div:not([class]) {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 1em;
+  }
+
+/* === «Стихи» остаются без подложек === */
+.poems p,
+.poems div {
+    background: transparent;
+  }
 </style>
 </head>
 <body>

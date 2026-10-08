@@ -299,6 +299,38 @@ nav {
     border-radius: 12px;
     padding: 1em;
   }
+  
+  /* === Сплошные белые панели: «К читателю», «Проза», «Контакты» === */
+
+/* Все безымянные абзацы после заголовков — на одной панели, без зазоров */
+h2 ~ p:not([class]),
+h3 ~ p:not([class]) {
+    margin: 0;
+    padding: 0.7em 1.5em;
+    border-radius: 0;
+  }
+
+/* Верх панели: первый абзац после заголовка */
+h2 + p:not([class]),
+h2 ~ p:not([class]):first-of-type,
+h3 + p:not([class]) {
+    padding-top: 1.5em;
+    border-radius: 12px 12px 0 0;
+  }
+
+/* Низ панели: последний абзац раздела */
+h2 ~ p:not([class]):last-of-type,
+h3 ~ p:not([class]):last-of-type {
+    padding-bottom: 1.5em;
+    border-radius: 0 0 12px 12px;
+  }
+
+/* Если в разделе один абзац — скруглены все четыре угла */
+h2 ~ p:not([class]):first-of-type:last-of-type,
+h3 ~ p:not([class]):first-of-type:last-of-type {
+    border-radius: 12px;
+  }
+  
 .content {
     background: rgba(233, 244, 242, 0.92);
     border-radius: 12px;

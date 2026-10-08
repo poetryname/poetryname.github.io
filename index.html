@@ -221,7 +221,8 @@ font-size: 0.9rem;
       font-size: 1.25rem !important;
     }
   }
-  /* === Подложка под основные тексты === */
+
+/* === Подложка под основные тексты === */
 .content,
 .container,
 .poem,
@@ -232,30 +233,46 @@ section,
 article {
     background: rgba(245, 250, 249, 0.92);
     border-radius: 12px;
+    padding: 1em;
+  }
+
+/* === Подложка под строки в шапке === */
+.header-text {
+    background: rgba(245, 250, 249, 0.92);
+    border-radius: 12px;
+    padding: 1em;
+    display: inline-block;
+  }
+
+/* === Раздел «Стихи» — без подложки === */
+.poems,
+.poems .content,
+.poems section,
+.poems article {
+    background: transparent;
+    padding: 0;
   }
 
 /* === Подложки под цветные цитаты и прямую речь === */
 .quote-pink,
 .speech-pink {
     background: rgba(255, 228, 238, 0.9);
+    padding: 1em;
+    border-radius: 12px;
   }
 
 .quote-blue,
 .speech-blue {
     background: rgba(228, 240, 255, 0.9);
+    padding: 1em;
+    border-radius: 12px;
   }
 
 .quote-beige,
 .quote-brown {
     background: rgba(247, 240, 229, 0.9);
-  }
-</style>
-  <style>
-  /* Фон на весь экран */
-  body {
-    background: url("fon.png") center center / cover no-repeat fixed,
-                url("fon.png.png") center center / cover no-repeat fixed;
-    background-color: #f5f0e8;
+    padding: 1em;
+    border-radius: 12px;
   }
     
 .content {

@@ -1902,9 +1902,9 @@ font-size: 0.9rem;
     </div>
 </div>
   
-<!-- ===== Очерки ===== -->
+<title>Очерки</title>
 <style>
-  /* ===== Общие стили страницы ===== */
+    /* ===== Общие стили страницы (можно удалить, если стили уже есть на сайте) ===== */
   body {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 1rem;
@@ -1915,16 +1915,17 @@ font-size: 0.9rem;
     padding: 0;
   }
 
+  /* ===== Разделы: границы блока — по центру, текст — по левому краю ===== */
   .section-content {
-    max-width: 800px;
-    margin: 40px auto;
+    max-width: 800px;          /* ширина текстовой колонки, как в «Прозе» и «Эссе» */
+    margin: 40px auto;         /* центрирование блока на странице */
     padding: 0 20px;
-    text-align: left;
+    text-align: left;          /* сам текст — по левому краю */
   }
 
   .section-content h1 {
     font-size: 1.8rem;
-    text-align: center;
+    text-align: center;        /* ДОБАВЛЕНО: главные заголовки — по центру */
     margin: 0 0 25px;
   }
 
@@ -1943,13 +1944,14 @@ font-size: 0.9rem;
     line-height: 1.7;
     margin: 0 0 12px;
     text-align: left;
-    text-indent: 1.5em;
+    text-indent: 1.5em;        /* красная строка абзаца */
   }
 
   .section-content p.no-indent {
     text-indent: 0;
   }
 
+  /* ИЗМЕНЕНО: цитата — с аккуратной левой линией, без лишних отступов */
   .section-content blockquote {
     margin: 20px 0;
     font-style: italic;
@@ -1958,6 +1960,7 @@ font-size: 0.9rem;
     border-left: 3px solid #ccc;
   }
 
+  /* ===== Содержание: активные синие строки ===== */
   .toc {
     margin: 0 auto 40px;
   }
@@ -1982,6 +1985,7 @@ font-size: 0.9rem;
     margin-bottom: 8px;
   }
 
+  /* ===== Адаптивность ===== */
   @media (max-width: 600px) {
     .section-content {
       padding: 0 15px;
@@ -1992,18 +1996,19 @@ font-size: 0.9rem;
     .section-content h3 { font-size: 1.1rem; }
   }
 </style>
+</head>
+<body>
 
-<div id="sketches" class="section-content">
-  <!-- ==================== СОДЕРЖАНИЕ ==================== -->
-  <div class="section-content toc" id="soderzhanie">
-    <h1>Содержание</h1>
-    <ol>
-      <li><a href="#opyt-seminarov">Опыт семинаров</a></li>
-      <li><a href="#krasnaya-stroka">Красная строка</a></li>
-      <li><a href="#uralskie-nedra">Уральские недра (цикл очерков)</a></li>
-      <li><a href="#ognennye-bryzgi">Огненные брызги. Тревожные и весёлые истории о детстве</a></li>
-    </ol>
-  </div>
+<!-- ==================== СОДЕРЖАНИЕ ==================== -->
+<div class="section-content toc" id="soderzhanie">
+  <h1>Содержание</h1>
+  <ol>
+    <li><a href="#opyt-seminarov">Опыт семинаров</a></li>
+    <li><a href="#krasnaya-stroka">Красная строка</a></li>
+    <li><a href="#uralskie-nedra">Уральские недра (цикл очерков)</a></li>
+    <li><a href="#ognennye-bryzgi">Огненные брызги. Тревожные и весёлые истории о детстве</a></li>
+  </ol>
+</div>
 
 <!-- ==================== ОПЫТ СЕМИНАРОВ ==================== -->
 <div class="section-content" id="opyt-seminarov">

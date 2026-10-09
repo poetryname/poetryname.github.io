@@ -7,7 +7,10 @@
 <meta name="keywords" content="Александр Баженов, Баженов Александр Сергеевич, поэзия, стихи, современная поэзия, литература, современные авторы, проза, эссе, поэт, писатель, эссеист, Екатеринбург, русская поэзия, Иосиф Бродский, Борис Рыжий, Николай Рубцов">
 <meta name="author" content="Александр Баженов">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://poetryname.github.io/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"><link rel="canonical" href="https://poetryname.github.io/">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
@@ -48,6 +51,50 @@
 }
 </script>
 <style>
+
+:root {
+  --header-font: 'Pacifico', cursive;
+  --header-size-desktop: 2.6rem;
+  --header-size-mobile: 1.9rem;
+  --subtitle-font: 'Open Sans', sans-serif;
+  --subtitle-size: 1.15rem;
+}
+
+.site-header-wrapper {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 16px;
+  padding: 32px 20px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.header-title {
+  font-family: var(--header-font);
+  font-size: var(--header-size-desktop);
+  line-height: 1.2;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.header-subtitle {
+  font-family: var(--subtitle-font);
+  font-weight: 400;
+  font-size: var(--subtitle-size);
+  color: #555;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .header-title {
+    font-size: var(--header-size-mobile);
+  }
+  .site-header-wrapper {
+    padding: 24px 16px;
+  }
+}
+  
 body {
 font-family: Georgia, serif;
 line-height: 1.7;
@@ -62,14 +109,7 @@ padding: 0 16px;
     font-size: 0.85rem;
   }
 }
-header {
-padding: 40px 0 20px 0; /* отступ сверху и небольшой снизу до панели */
-position: relative;
-display: flex;
-align-items: center;
-justify-content: center; /* центрируем содержимое хедера */
-margin-top: 15vh;
-}
+
 /* Контейнер для прозы и статей — строгий столбец */
 #prose, #articles {
   max-width: 680px;          /* жёсткий предел ширины */
@@ -388,14 +428,13 @@ section > div:not([class]) {
 
 </style>
 </head>
-<body>
-<header>
-<img src="author.jpg" alt="Александр Баженов" class="author-photo">
-<div class="header-text">
-<p style="margin:0;">Литературный проект и авторский сайт Александра Баженова.</p>
-<p style="margin:0;">Александр Баженов, поэт, писатель, эссеист.</p>
-<p style="margin:0;">Живёт и работает в Екатеринбурге.</p>
-</div>
+  <div class="site-header-wrapper">
+    <h1 class="header-title">Литературный проект и авторский сайт Александра Баженова</h1>
+    <div class="header-subtitle">
+      Александр Баженов, поэт, писатель, эссеист.<br>
+      Живёт и работает в Екатеринбурге.
+    </div>
+  </div>
 </header>
 
 <nav>

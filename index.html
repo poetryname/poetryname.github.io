@@ -64,9 +64,16 @@ padding: 0 16px;
 }
 
 @media (max-width: 768px) {
-  .section-content {
-    font-size: 0.85rem;
+  /* Базовый текст: фиксированный размер, гарантированно уменьшенный */
+  body, p, .text-block, .content, .container, .section-content {
+    font-size: 16px !important;
+    line-height: 1.6 !important; /* чуть плотнее строки, чтобы на телефоне читалось лучше */
   }
+
+  /* Заголовки: уменьшенные, но пропорциональные */
+  h1 { font-size: 26px !important; }
+  h2 { font-size: 22px !important; }
+  h3 { font-size: 18px !important; }
 }
 header {
 padding: 40px 0 20px 0; /* отступ сверху и небольшой снизу до панели */
@@ -210,24 +217,17 @@ padding: 40px 0;
 color: #777;
 font-size: 0.9rem;
 }
-  /* Шрифт крупнее на телефонах — на 2 кегля */
-  @media (max-width: 768px) {
-    body, p, li, span, div {
-      font-size: 1.2rem !important;
-    }
-    h1, h2, h3 {
-      font-size: 1.35rem !important;
-    }
+
+@media (max-width: 768px) {
+  body, p, .text-block, .content, .container, .section-content,
+  #prose p, #articles p {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
   }
-  /* Шрифт крупнее на компьютерах — на 1,5 кегля */
-  @media (min-width: 769px) {
-    body, p, li, span, div {
-      font-size: 1.1rem !important;
-    }
-    h1, h2, h3 {
-      font-size: 1.25rem !important;
-    }
-  }
+  h1 { font-size: 26px !important; }
+  h2 { font-size: 22px !important; }
+  h3 { font-size: 18px !important; }
+}
 
 /* === Подложка под основные тексты === */
 .content,

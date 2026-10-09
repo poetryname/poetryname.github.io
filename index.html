@@ -7,6 +7,9 @@
 <meta name="keywords" content="Александр Баженов, Баженов Александр Сергеевич, поэзия, стихи, современная поэзия, литература, современные авторы, проза, эссе, поэт, писатель, эссеист, Екатеринбург, русская поэзия, Иосиф Бродский, Борис Рыжий, Николай Рубцов">
 <meta name="author" content="Александр Баженов">
 <meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 <link rel="canonical" href="https://poetryname.github.io/">
 
 <!-- Twitter Card -->
@@ -48,6 +51,9 @@
 }
 </script>
 <style>
+:root {
+  --header-font: 'Pacifico', cursive;
+} 
 body {
 font-family: Georgia, serif;
 line-height: 1.7;
@@ -104,6 +110,7 @@ margin-right: 24px; /* расстояние между фото и тексто�
 }
 
 .header-text {
+font-family: var(--header-font), sans-serif; 
 text-align: left;
 font-size: 1.05rem;
 color: #444;

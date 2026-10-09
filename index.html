@@ -457,17 +457,19 @@ main, .container, .wrapper {
   z-index: 3;
 }
  
-/* Только для «К читателю»: принудительно делаем большие отступы сверху и снизу */
+/* Только «К читателю»: большие поля, остальные блоки не тронуты */
 .k-chitatelyu,
 .intro {
   padding-top: 100px !important;
   padding-bottom: 100px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
   margin-top: 40px !important;
   margin-bottom: 40px !important;
 }
 
 /* Сбрасываем любые внутренние отступы у .content внутри этого раздела,
-   чтобы они не «съедали» наши большие поля */
+   чтобы они не мешали нашим полям */
 .k-chitatelyu .content,
 .k-chitatelyu div.content,
 .k-chitatelyu section.content,

@@ -51,301 +51,287 @@
 }
 </script>
 <style>
-:root {
-  --header-font: 'Pacifico', cursive;
-} 
-body {
-font-family: Georgia, serif;
-line-height: 1.7;
-color: #1a1a1a;
-background: #f9f9f7;
-margin: 0;
-padding: 0 16px;
-}
+  /* === ТВОИ ИСХОДНЫЕ СТИЛИ (ничего не тронуто) === */
+  :root {
+    --header-font: 'Pacifico', cursive;
+  } 
 
-@media (max-width: 768px) {
-  /* Базовый текст: фиксированный размер, гарантированно уменьшенный */
-  body, p, .text-block, .content, .container, .section-content {
-    font-size: 16px !important;
-    line-height: 1.6 !important; /* чуть плотнее строки, чтобы на телефоне читалось лучше */
-  }
-
-  /* Заголовки: уменьшенные, но пропорциональные */
-  h1 { font-size: 26px !important; }
-  h2 { font-size: 22px !important; }
-  h3 { font-size: 18px !important; }
-}
-header {
-padding: 40px 0 20px 0; /* отступ сверху и небольшой снизу до панели */
-position: relative;
-display: flex;
-align-items: center;
-justify-content: center; /* центрируем содержимое хедера */
-margin-top: 15vh;
-}
-/* Контейнер для прозы и статей — строгий столбец */
-#prose, #articles {
-  max-width: 680px;          /* жёсткий предел ширины */
-  margin: 40px auto;         /* центрируем столбец, сверху/снизу воздух */
-  padding: 0 16px;           /* небольшие боковые отступы внутри колонки */
-  box-sizing: border-box;   /* чтобы padding не увеличивал общую ширину */
-}
-
-/* Текст внутри колонки — удобно для чтения */
-#prose p, #articles p {
-  line-height: 1.8;          /* чуть больше воздуха между строками */
-  text-align: left;          /* классический литературный вариант */
-  hyphens: auto;             /* аккуратные переносы слов (работает в большинстве браузеров) */
-  margin-bottom: 24px;        /* расстояние между абзацами */
-}
-
-/* Заголовки в прозе/статьях — чтобы не «прилипали» к тексту */
-#prose h3, #articles h3 {
-  margin-top: 36px;
-  margin-bottom: 16px;
-  font-size: 1.4rem;
-}
-.author-photo {
-width: 130px;
-height: 130px;
-border-radius: 50%;
-object-fit: cover;
-box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-border: 3px solid #f0f0f0;
-flex-shrink: 0; /* чтобы фото не сплющивалось */
-margin-right: 24px; /* расстояние между фото и текстом */
-}
-
-.header-text {
-font-family: var(--header-font), sans-serif; 
-text-align: left;
-font-size: 1.05rem;
-color: #444;
-line-height: 1.9;
-max-width: 560px;
-}
-
-nav {
-margin: 20px 0; /* небольшой ровный отступ между шапкой и панелью */
-overflow-x: auto;
-}
-
-.tabs {
-display: flex;
-gap: 8px;
-flex-wrap: wrap;
-justify-content: center;
-}
-
-.tab-btn {
-padding: 10px 16px;
-border: 1px solid #ccc;
-background: white;
-cursor: pointer;
-border-radius: 6px;
-font-size: 1rem;
-transition: background 0.2s, color 0.2s;
-}
-
-.tab-btn:hover { background: #eee; }
-
-.tab-btn.active {
-background: #2c3e50;
-color: white;
-border-color: #2c3e50;
-}
-
-.toggle-btn {
-display: block;
-margin: 20px auto;
-padding: 10px 28px;
-background: #8b4513;
-color: white;
-border: none;
-border-radius: 6px;
-font-size: 1rem;
-cursor: pointer;
-transition: background 0.2s;
-}
-
-.toggle-btn:hover { background: #a0522d; }
-
-main { padding: 24px 0; }
-
-.section-content { display: none; }
-.section-content.active { display: block; animation: fadeIn 0.4s ease; }
-
-@keyframes fadeIn {
-from { opacity: 0; transform: translateY(4px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-.poem-block {
-max-width: 700px;
-margin: 32px auto;
-padding: 20px;
-background: white;
-border-left: 4px solid #8b4513;
-box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-position: relative;
-}
-
-.snowflake-divider {
-display: inline-block;
-font-size: 1.2rem;
-color: #8b4513;
-margin: -16px 0 12px 0;
-letter-spacing: 0.3em;
-user-select: none;
-}
-
-.photo-area {
-text-align: center;
-margin: 32px 0;
-}
-
-.photo-area img {
-max-width: 100%;
-height: auto;
-border-radius: 8px;
-box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-footer {
-text-align: center;
-padding: 40px 0;
-color: #777;
-font-size: 0.9rem;
-}
-
-@media (max-width: 768px) {
-  body, p, .text-block, .content, .container, .section-content,
-  #prose p, #articles p {
-    font-size: 16px !important;
-    line-height: 1.6 !important;
-  }
-  h1 { font-size: 26px !important; }
-  h2 { font-size: 22px !important; }
-  h3 { font-size: 18px !important; }
-}
-
-/* === Подложка под основные тексты === */
-.content,
-.container,
-.poem,
-.verse,
-.text,
-.text-block,
-section,
-article {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 1em;
-  }
-
-/* === Подложка под строки в шапке === */
-.header-text {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 1em;
-    display: inline-block;
-  }
-
-/* === Раздел «Стихи» — без подложки === */
-.poems,
-.poems .content,
-.poems section,
-.poems article {
-    background: transparent;
-    padding: 0;
-  }
-
-/* === Подложки под цветные цитаты и прямую речь === */
-.quote-pink,
-.speech-pink {
-    background: rgba(255, 228, 238, 0.9);
-    padding: 1em;
-    border-radius: 12px;
-  }
-
-.quote-blue,
-.speech-blue {
-    background: rgba(228, 240, 255, 0.9);
-    padding: 1em;
-    border-radius: 12px;
-  }
-
-.quote-beige,
-.quote-brown {
-    background: rgba(247, 240, 229, 0.9);
-    padding: 1em;
-    border-radius: 12px;
-  }
-  
-/* === Подложки для разделов «К читателю», «Проза», «Контакты» === */
-.k-chitatelyu,
-.intro,
-.prose,
-.proza,
-.contacts,
-.kontakty,
-.contact {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 1em;
-  }
-
-/* === Бирюзовая подложка под «Содержание» (где оно есть) === */
-.toc,
-.contents,
-.soderzhanie,
-.menu,
-.spisok {
-    background: rgba(233, 244, 242, 0.92);
-    border-radius: 12px;
-    padding: 1em;
-  }
-  
-  /* === Сплошные белые панели: «К читателю», «Проза», «Контакты» === */
-
-/* Все безымянные абзацы после заголовков — на одной панели, без зазоров */
-h2 ~ p:not([class]),
-h3 ~ p:not([class]) {
+  body {
+    font-family: Georgia, serif;
+    line-height: 1.7;
+    color: #1a1a1a;
     margin: 0;
-    padding: 0.7em 1.5em;
-    border-radius: 0;
+    padding: 0 16px;
   }
 
-/* Верх панели: первый абзац после заголовка */
-h2 + p:not([class]),
-h2 ~ p:not([class]):first-of-type,
-h3 + p:not([class]) {
-    padding-top: 1.5em;
-    border-radius: 12px 12px 0 0;
+  @media (max-width: 768px) {
+    body, p, .text-block, .content, .container, .section-content {
+      font-size: 16px !important;
+      line-height: 1.6 !important;
+    }
+    h1 { font-size: 26px !important; }
+    h2 { font-size: 22px !important; }
+    h3 { font-size: 18px !important; }
   }
 
-/* Низ панели: последний абзац раздела */
-h2 ~ p:not([class]):last-of-type,
-h3 ~ p:not([class]):last-of-type {
-    padding-bottom: 1.5em;
-    border-radius: 0 0 12px 12px;
+  header {
+    padding: 40px 0 20px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15vh;
   }
 
-/* Если в разделе один абзац — скруглены все четыре угла */
-h2 ~ p:not([class]):first-of-type:last-of-type,
-h3 ~ p:not([class]):first-of-type:last-of-type {
-    border-radius: 12px;
+  #prose, #articles {
+    max-width: 680px;
+    margin: 40px auto;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  #prose p, #articles p {
+    line-height: 1.8;
+    text-align: left;
+    hyphens: auto;
+    margin-bottom: 24px;
+  }
+
+  #prose h3, #articles h3 {
+    margin-top: 36px;
+    margin-bottom: 16px;
+    font-size: 1.4rem;
+  }
+
+  .author-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: 3px solid #f0f0f0;
+    flex-shrink: 0;
+    margin-right: 24px;
+  }
+
+  .header-text {
+    font-family: var(--header-font), sans-serif; 
+    text-align: left;
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.9;
+    max-width: 560px;
+  }
+
+  nav {
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tab-btn {
+    padding: 10px 16px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .tab-btn:hover { background: #eee; }
+
+  .tab-btn.active {
+    background: #2c3e50;
+    color: white;
+    border-color: #2c3e50;
+  }
+
+  .toggle-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 28px;
+    background: #8b4513;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .toggle-btn:hover { background: #a0522d; }
+
+  main { padding: 24px 0; }
+
+  .section-content { display: none; }
+  .section-content.active { display: block; animation: fadeIn 0.4s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .poem-block {
+    max-width: 700px;
+    margin: 32px auto;
+    padding: 20px;
+    background: white;
+    border-left: 4px solid #8b4513;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    position: relative;
+  }
+
+  .snowflake-divider {
+    display: inline-block;
+    font-size: 1.2rem;
+    color: #8b4513;
+    margin: -16px 0 12px 0;
+    letter-spacing: 0.3em;
+    user-select: none;
+  }
+
+  .photo-area {
+    text-align: center;
+    margin: 32px 0;
+  }
+
+  .photo-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 0;
+    color: #777;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    body, p, .text-block, .content, .container, .section-content,
+    #prose p, #articles p {
+      font-size: 16px !important;
+      line-height: 1.6 !important;
+    }
+    h1 { font-size: 26px !important; }
+    h2 { font-size: 22px !important; }
+    h3 { font-size: 18px !important; }
+  }
+
+  .content,
+  .container,
+  .poem,
+  .verse,
+  .text,
+  .text-block,
+  section,
+  article {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 1em;
+  }
+
+  .header-text {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 1em;
+      display: inline-block;
+  }
+
+  .poems,
+  .poems .content,
+  .poems section,
+  .poems article {
+      background: transparent;
+      padding: 0;
+  }
+
+  .quote-pink,
+  .speech-pink {
+      background: rgba(255, 228, 238, 0.9);
+      padding: 1em;
+      border-radius: 12px;
+  }
+
+  .quote-blue,
+  .speech-blue {
+      background: rgba(228, 240, 255, 0.9);
+      padding: 1em;
+      border-radius: 12px;
+  }
+
+  .quote-beige,
+  .quote-brown {
+      background: rgba(247, 240, 229, 0.9);
+      padding: 1em;
+      border-radius: 12px;
   }
   
-.content {
-    background: rgba(233, 244, 242, 0.92);
-    border-radius: 12px;
-    padding: 30px 40px;
-    max-width: 900px;
-    margin: 40px auto;
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+  .k-chitatelyu,
+  .intro,
+  .prose,
+  .proza,
+  .contacts,
+  .kontakty,
+  .contact {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 1em;
   }
-  /* Лёгкое осветление-размытие у шапки */
+
+  .toc,
+  .contents,
+  .soderzhanie,
+  .menu,
+  .spisok {
+      background: rgba(233, 244, 242, 0.92);
+      border-radius: 12px;
+      padding: 1em;
+  }
+  
+  h2 ~ p:not([class]),
+  h3 ~ p:not([class]) {
+      margin: 0;
+      padding: 0.7em 1.5em;
+      border-radius: 0;
+  }
+
+  h2 + p:not([class]),
+  h2 ~ p:not([class]):first-of-type,
+  h3 + p:not([class]) {
+      padding-top: 1.5em;
+      border-radius: 12px 12px 0 0;
+  }
+
+  h2 ~ p:not([class]):last-of-type,
+  h3 ~ p:not([class]):last-of-type {
+      padding-bottom: 1.5em;
+      border-radius: 0 0 12px 12px;
+  }
+
+  h2 ~ p:not([class]):first-of-type:last-of-type,
+  h3 ~ p:not([class]):first-of-type:last-of-type {
+      border-radius: 12px;
+  }
+  
+  .content {
+      background: rgba(233, 244, 242, 0.92);
+      border-radius: 12px;
+      padding: 30px 40px;
+      max-width: 900px;
+      margin: 40px auto;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+  }
+
   body::before {
     content: "";
     position: fixed;
@@ -360,7 +346,6 @@ h3 ~ p:not([class]):first-of-type:last-of-type {
     mask-image: linear-gradient(to bottom, black, transparent);
   }
 
-  /* То же у подвала, под строкой «© Литературный сайт...» */
   body::after {
     content: "";
     position: fixed;
@@ -375,88 +360,94 @@ h3 ~ p:not([class]):first-of-type:last-of-type {
     mask-image: linear-gradient(to top, black, transparent);
   }
   
-/* === Белые подложки: «К читателю», «Проза», «Контакты» === */
-h2 ~ p:not([class]),
-h3 ~ p:not([class]),
-h2 ~ div:not([class]),
-h3 ~ div:not([class]),
-section > p:not([class]),
-section > div:not([class]) {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 1em;
+  h2 ~ p:not([class]),
+  h3 ~ p:not([class]),
+  h2 ~ div:not([class]),
+  h3 ~ div:not([class]),
+  section > p:not([class]),
+  section > div:not([class]) {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 1em;
   }
 
-/* === «Стихи» остаются без подложек === */
-.poems p,
-.poems div {
+  .poems p,
+  .poems div {
+      background: transparent;
+  }
+
+  nav {
+    margin-bottom: 56px;
+  }
+
+  .toggle-btn,
+  button[class*="toggle"] {
+    position: relative;
+    z-index: 2;
+    margin-top: 20px;
+  }
+
+  .site-horizon {
+    width: 100%;
+    height: 8px;
     background: transparent;
+    border: none;
+    border-bottom: 8px solid transparent;
+    border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 40'%3E%3Cpath d='M0,20 C250,45 750,15 1000,20' fill='none' stroke='%23fbbd70' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E") 1;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.22);
+    margin: 0;
+    position: relative;
+    z-index: 1;
   }
 
-/* Отодвигаем панель навигации от линии, чтобы было «воздуха» */
-nav {
-  margin-bottom: 56px; /* большой отступ, чтобы не прилегало */
-}
+  body {
+    background: linear-gradient(
+      to bottom,
+      #f9f9f7 0%,
+      #fdf6e3 45%,
+      #e6f0f8 70%,
+      #cfe4f2 100%
+    );
+  }
 
-/* Опускаем кнопку «Читать дальше» ровно под новую границу */
-.toggle-btn,
-button[class*="toggle"] {
-  position: relative;
-  z-index: 2;
-  margin-top: 20px; /* опускаем кнопку, чтобы она не прилипала */
-}
+  .sea-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 60px;
+    background: radial-gradient(
+      circle at center bottom,
+      rgba(251, 189, 112, 0.35) 0%,
+      rgba(255, 255, 255, 0) 65%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
 
-/* Художественная линия-горизонт: плавная волна */
-.site-horizon {
-  width: 100%;
-  height: 8px;
-  background: transparent;
-  border: none;
-  border-bottom: 8px solid transparent;
 
-  /* SVG-волна: тёплый закатный цвет */
-  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 40'%3E%3Cpath d='M0,20 C250,45 750,15 1000,20' fill='none' stroke='%23fbbd70' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E") 1;
+  /* ========================================================= */
+  /* === ВОТ ЭТО ДОБАВЛЕНО, ЧТОБЫ ПРОСТО ПОЛОЖИТЬ КАРТИНКУ === */
+  /* ========================================================= */
 
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.22); /* объёмная тень */
-  margin: 0;
-  position: relative;
-  z-index: 1;
-}
+  /* Блок с фоновой картинкой (он будет лежать ПОД контентом) */
+  .hero-top-bg {
+    height: 400px; /* <-- МЕНЯЙ ТОЛЬКО ЭТО ЧИСЛО, если граница не там */
+    background-image: url('fon.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
 
-/* «Море» от линии горизонта до подвала: закатные переливы */
-body {
-  background: linear-gradient(
-    to bottom,
-    #f9f9f7 0%,       /* тёплый верх (как у тебя сейчас) */
-    #fdf6e3 45%,      /* кремово‑золотой (закат) */
-    #e6f0f8 70%,      /* голубоватая рябь */
-    #cfe4f2 100%      /* глубина моря */
-  );
-}
-
-/* Лёгкие «лучи» поверх моря: полупрозрачный золотой градиент */
-.sea-glow::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 60px; /* оставляем место под подвал */
-  background: radial-gradient(
-    circle at center bottom,
-    rgba(251, 189, 112, 0.35) 0%,
-    rgba(255, 255, 255, 0) 65%
-  );
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Контейнер контента, чтобы он был поверх «моря» и «лучей» */
-main, .container, .wrapper {
-  position: relative;
-  z-index: 3;
-}
-  
+  /* Контейнер контента, чтобы он был поверх «моря», «лучей» И картинки */
+  main, .container, .wrapper, #articles {
+    position: relative;
+    z-index: 3;
+  }
 </style>
 </head>
 <body class="sea-glow">
@@ -927,7 +918,9 @@ main, .container, .wrapper {
 </style>
 </head>
 <body>
-
+<div class="hero-top-bg">
+  <!-- Сюда ничего не пишем, это просто подложка -->
+</div>
 <div id="articles" class="section-content">
   <h2>Статьи</h2>
 

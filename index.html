@@ -393,26 +393,73 @@ section > div:not([class]) {
     background: transparent;
   }
 
-/* --- Линия-горизонт (декоративная граница) --- */
-.site-horizon {
-  width: 100%;
-  height: 3px;
-  background: #d4cfa5;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.18);
-  margin: 16px 0;
-  position: relative;
-  z-index: 1;
+/* Отодвигаем панель навигации от линии, чтобы было «воздуха» */
+nav {
+  margin-bottom: 56px; /* большой отступ, чтобы не прилегало */
 }
 
-/* Кнопка поверх линии */
+/* Опускаем кнопку «Читать дальше» ровно под новую границу */
 .toggle-btn,
 button[class*="toggle"] {
   position: relative;
   z-index: 2;
+  margin-top: 20px; /* опускаем кнопку, чтобы она не прилипала */
 }
+
+/* Художественная линия-горизонт: плавная волна */
+.site-horizon {
+  width: 100%;
+  height: 8px;
+  background: transparent;
+  border: none;
+  border-bottom: 8px solid transparent;
+
+  /* SVG-волна: тёплый закатный цвет */
+  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 40'%3E%3Cpath d='M0,20 C250,45 750,15 1000,20' fill='none' stroke='%23fbbd70' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E") 1;
+
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.22); /* объёмная тень */
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* «Море» от линии горизонта до подвала: закатные переливы */
+body {
+  background: linear-gradient(
+    to bottom,
+    #f9f9f7 0%,       /* тёплый верх (как у тебя сейчас) */
+    #fdf6e3 45%,      /* кремово‑золотой (закат) */
+    #e6f0f8 70%,      /* голубоватая рябь */
+    #cfe4f2 100%      /* глубина моря */
+  );
+}
+
+/* Лёгкие «лучи» поверх моря: полупрозрачный золотой градиент */
+.sea-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 60px; /* оставляем место под подвал */
+  background: radial-gradient(
+    circle at center bottom,
+    rgba(251, 189, 112, 0.35) 0%,
+    rgba(255, 255, 255, 0) 65%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Контейнер контента, чтобы он был поверх «моря» и «лучей» */
+main, .container, .wrapper {
+  position: relative;
+  z-index: 3;
+}
+  
 </style>
 </head>
-<body>
+<body class="sea-glow">
 <header>
 <img src="author.jpg" alt="Александр Баженов" class="author-photo">
 <div class="header-text">

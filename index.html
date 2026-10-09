@@ -456,6 +456,58 @@ main, .container, .wrapper {
   position: relative;
   z-index: 3;
 }
+/* --- Сама «стена» с картиной --- */
+.closed-wall-image {
+  width: 100%;
+  height: 480px; /* Высота подобрана так, чтобы солнце было скрыто под кнопкой. Если кнопка выше — увеличь до 520px или 560px */
+  background-image: url('path/to/your/sunset-painting.jpg'); /* Вставь сюда путь к твоей картинке */
+  background-size: cover; /* Картинка заполняет блок, не искажаясь */
+  background-position: center bottom; /* Центрируем по горизонтали, прижимаем к низу — так солнце окажется в центре и ниже */
+  position: relative;
+  z-index: 2; /* Лежит поверх фона body, но под контентом */
+}
+
+/* --- Плавное растворение («таяние») у самого низа --- */
+.closed-wall-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px; /* Зона растворения: 120px от низа */
+  background: linear-gradient(
+    to top,
+    #f9f9f7 0%,       /* Цвет твоего основного фона (верх) */
+    rgba(249, 249, 247, 0) 100% /* Полностью прозрачный внизу */
+  );
+  pointer-events: none;
+}  
+ .closed-wall-image {
+  width: 100%;
+  height: 560px;
+  background-image: url('/poetryname.github.io/sea-wall.png');
+  background-size: cover;
+  background-position: center bottom;
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+.closed-wall-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  /* Замени #f9f9f7 на цвет фона твоего сайта, если он отличается */
+  background: linear-gradient(to top, #f9f9f7 0%, rgba(249, 249, 247, 0) 100%);
+  pointer-events: none;
+}
+
+.closed-wall-image.hidden {
+  display: none;
+} 
   
 </style>
 </head>
@@ -1933,7 +1985,33 @@ main, .container, .wrapper {
   </article>
 
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.querySelector('.toggle-btn') || 
+                    document.querySelector('button[class*="toggle"]');
+  const closedWall = document.getElementById('closed-wall');
+  const mainContent = document.querySelector('main'); // Или тот контейнер, где лежат твои разделы
 
+  if (!toggleBtn) return;
+
+  toggleBtn.addEventListener('click', () => {
+    // Если стена сейчас видна (значит, контент скрыт) -> показываем контент, прячем стену
+    if (closedWall.style.display !== 'none') {
+      closedWall.style.display = 'none';
+      if(mainContent) mainContent.style.display = 'block';
+      
+      // Прокрутка к началу контента
+      mainContent.scrollIntoView({ behavior: 'smooth' });
+    } 
+    // Если стена скрыта (значит, контент виден) -> прячем контент, показываем стену
+    else {
+      closedWall.style.display = 'block';
+      if(mainContent) mainContent.style.display = 'none';
+    }
+  });
+});
+</script>
+  
 </body>
 </html>
 
@@ -2405,7 +2483,10 @@ main, .container, .wrapper {
   </div>
 
 </main>
-
+  
+<!-- Стена-фон: видна, когда все разделы свернуты -->
+<div id="closed-wall" class="closed-wall-image"></div>
+  
 <footer>
 <p>&copy; Литературный сайт. Все права принадлежат автору.</p>
 </footer>

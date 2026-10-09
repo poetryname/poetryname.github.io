@@ -457,21 +457,17 @@ main, .container, .wrapper {
   z-index: 3;
 }
  
-/* ГАРАНТИЯ: только раздел «К читателю», только отступы, структура не тронута */
+/* Только для «К читателю»: принудительно делаем большие отступы сверху и снизу */
 .k-chitatelyu,
-.intro,
-section.k-chitatelyu,
-div.k-chitatelyu,
-section.intro,
-div.intro {
-  padding-top: 120px !important;
-  padding-bottom: 120px !important;
-  margin-top: 80px !important;
-  margin-bottom: 80px !important;
+.intro {
+  padding-top: 100px !important;
+  padding-bottom: 100px !important;
+  margin-top: 40px !important;
+  margin-bottom: 40px !important;
 }
 
-/* Сбрасываем любые внутренние отступы у .content внутри этого раздела, 
-   чтобы они не мешали нашим большим полям */
+/* Сбрасываем любые внутренние отступы у .content внутри этого раздела,
+   чтобы они не «съедали» наши большие поля */
 .k-chitatelyu .content,
 .k-chitatelyu div.content,
 .k-chitatelyu section.content,

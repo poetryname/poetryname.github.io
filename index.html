@@ -457,18 +457,25 @@ main, .container, .wrapper {
   z-index: 3;
 }
  
-.k-chitatelyu,
-.intro {
-  padding-top: 80px !important;
-  padding-bottom: 80px !important;
-  margin-top: 48px !important;
-  margin-bottom: 48px !important;
+/* Точечно: только «К читателю», только отступы, ничего больше */
+section.k-chitatelyu,
+div.k-chitatelyu,
+section.intro,
+div.intro {
+  padding-top: 100px !important;
+  padding-bottom: 100px !important;
+  margin-top: 60px !important;
+  margin-bottom: 60px !important;
 }
 
-.k-chitatelyu .content,
-.intro .content {
+/* Если внутри есть .content — убираем у него внутренние отступы, чтобы не мешали */
+section.k-chitatelyu .content,
+div.k-chitatelyu .content,
+section.intro .content,
+div.intro .content {
   padding: 0 !important;
 }
+  
 </style>
 </head>
 <body class="sea-glow">

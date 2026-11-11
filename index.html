@@ -2394,15 +2394,64 @@ main, .container, .wrapper {
 
 <!-- ===== Фотоальбом ===== -->
 <div id="photo" class="section-content">
-<div class="photo-area">
-<img src="images/photo1.jpg" alt="Фото для сайта" />
-</div>
-<p>Добавьте сюда другие фото в галерее.</p>
-</div>
+  <style>
+    #photo .gallery-box { text-align: center; }
+    #photo .gallery-box img {
+      max-width: 100%;
+      max-height: 600px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    }
+    #photo .gallery-nav {
+      margin-top: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    #photo .gallery-nav button {
+      cursor: pointer;
+      padding: 8px 22px;
+      font-size: 16px;
+      border: 1px solid #999;
+      border-radius: 6px;
+      background: #f5f5f5;
+    }
+    #photo .gallery-nav button:hover { background: #e0e0e0; }
+    #photo .gallery-counter { font-size: 15px; color: #555; }
+  </style>
 
-<!-- ===== Библиотека публикаций ===== -->
-<div id="library" class="section-content">
-<p>Здесь будет библиотека публикаций.</p>
+  <div class="gallery-box">
+    <img id="galleryImage" src="images/photo1.jpg" alt="Фотоальбом" />
+    <div class="gallery-nav">
+      <button type="button" onclick="galleryStep(-1)">← Назад</button>
+      <span class="gallery-counter" id="galleryCounter"></span>
+      <button type="button" onclick="galleryStep(1)">Дальше →</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // Список фото: если имена файлов другие — поправьте эту строку
+      var photos = [];
+      for (var i = 1; i <= 100; i++) {
+        photos.push('images/photo' + i + '.jpg');
+      }
+
+      var current = 0;
+      var img = document.getElementById('galleryImage');
+      var counter = document.getElementById('galleryCounter');
+
+      window.galleryStep = function (direction) {
+        current = (current + direction + photos.length) % photos.length;
+        img.src = photos[current];
+        counter.textContent = (current + 1) + ' / ' + photos.length;
+      };
+
+      counter.textContent = '1 / ' + photos.length;
+    })();
+  </script>
 </div>
 
 <!-- ===== Контакты ===== -->

@@ -2395,41 +2395,137 @@ main, .container, .wrapper {
 <!-- ===== Фотоальбом ===== -->
 <div id="photo" class="section-content">
   <style>
-    #photo .gallery-box { text-align: center; }
-    #photo .gallery-box img {
+    /* стили только для фотоальбома и просмотрщика pa-* */
+    #photo .pa-thumb {
       max-width: 100%;
       max-height: 600px;
       border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
-    }
-    #photo .gallery-nav {
-      margin-top: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    #photo .gallery-nav button {
+      box-shadow: 0 2px 10px rgba(0,0,0,.25);
       cursor: pointer;
-      padding: 8px 22px;
-      font-size: 16px;
-      border: 1px solid #999;
-      border-radius: 6px;
-      background: #f5f5f5;
     }
-    #photo .gallery-nav button:hover { background: #e0e0e0; }
-    #photo .gallery-counter { font-size: 15px; color: #555; }
+    #pa-viewer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.93);
+      z-index: 99999;
+    }
+    #pa-viewer.pa-open { display: flex; align-items: center; justify-content: center; }
+    #pa-viewer img {
+      max-width: 90vw;
+      max-height: 86vh;
+      border-radius: 6px;
+      box-shadow: 0 0 30px rgba(0,0,0,.6);
+    }
+    #pa-viewer .pa-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 34px;
+      padding: 10px 22px;
+      color: #fff;
+      background: rgba(255,255,255,.12);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #pa-viewer .pa-nav:hover { background: rgba(255,255,255,.28); }
+    #pa-viewer .pa-prev { left: 14px; }
+    #pa-viewer .pa-next { right: 14px; }
+    #pa-viewer .pa-close {
+      position: fixed;
+      top: 14px;
+      right: 18px;
+      font-size: 26px;
+      color: #fff;
+      background: rgba(255,255,255,.12);
+      border: none;
+      border-radius: 8px;
+      padding: 6px 14px;
+      cursor: pointer;
+    }
+    #pa-viewer .pa-count {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 15px;
+    }
   </style>
 
-  <div class="gallery-box">
-    <img id="galleryImage" src="images/photo1.jpg" alt="Фотоальбом" />
-    <div class="gallery-nav">
-      <button type="button" onclick="galleryStep(-1)">← Назад</button>
-      <span class="gallery-counter" id="galleryCounter"></span>
-      <button type="button" onclick="galleryStep(1)">Дальше →</button>
-    </div>
+  <div class="photo-area">
+    <img class="pa-thumb" id="pa-thumb" src="" alt="Фотоальбом" onclick="paOpen()" style="display:none" />
+    <p id="pa-msg">Нажмите на фото, чтобы открыть всю подборку.</p>
   </div>
+</div>
+
+<!-- Просмотрщик фотоальбома -->
+<div id="pa-viewer" onclick="if (event.target === this) paClose();">
+  <button type="button" class="pa-close" onclick="paClose()">✕</button>
+  <button type="button" class="pa-nav pa-prev" onclick="paStep(-1)">‹ Назад</button>
+  <img id="pa-img" src="" alt="Фото" />
+  <button type="button" class="pa-nav pa-next" onclick="paStep(1)">Дальше ›</button>
+  <div class="pa-count" id="pa-count"></div>
+</div>
+
+<script>
+(function () {
+  var REPO = 'poetryname/poetryname.github.io';
+  var photos = [];
+  var cur = 0;
+
+  function el(id) { return document.getElementById(id); }
+
+  // Спрашиваем у GitHub, что лежит в папке images — имена файлов знать не нужно
+  fetch('https://api.github.com/repos/' + REPO + '/contents/images')
+    .then(function (r) { return r.json(); })
+    .then(function (list) {
+      if (!Array.isArray(list)) throw new Error('no folder');
+      photos = list
+        .filter(function (f) { return /\.(jpe?g|png|gif|webp|bmp)$/i.test(f.name); })
+        .map(function (f) { return 'images/' + f.name; })
+        // сортировка по номерам: photo2 встанет раньше photo10
+        .sort(function (a, b) { return a.localeCompare(b, undefined, { numeric: true }); });
+      if (!photos.length) { el('pa-msg').textContent = 'Фото пока не загружены.'; return; }
+      el('pa-msg').style.display = 'none';
+      el('pa-thumb').src = photos[0];
+      el('pa-thumb').style.display = '';
+    })
+    .catch(function () {
+      el('pa-msg').textContent = 'Фотоальбом временно недоступен.';
+    });
+
+  window.paOpen = function () {
+    if (!photos.length) return;
+    cur = 0;
+    paRender();
+    el('pa-viewer').classList.add('pa-open');
+  };
+
+  window.paClose = function () {
+    el('pa-viewer').classList.remove('pa-open');
+  };
+
+  window.paStep = function (d) {
+    cur = (cur + d + photos.length) % photos.length;
+    paRender();
+  };
+
+  function paRender() {
+    el('pa-img').src = photos[cur];
+    el('pa-count').textContent = (cur + 1) + ' / ' + photos.length;
+  }
+
+  // Клавиши: влево/вправо — листать, Esc — закрыть
+  document.addEventListener('keydown', function (e) {
+    if (!el('pa-viewer').classList.contains('pa-open')) return;
+    if (e.key === 'Escape') paClose();
+    if (e.key === 'ArrowRight') paStep(1);
+    if (e.key === 'ArrowLeft') paStep(-1);
+  });
+})();
+</script>
 
   <script>
     (function () {

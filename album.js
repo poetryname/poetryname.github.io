@@ -1,25 +1,22 @@
 (function () {
   "use strict";
 
-  // ============ НАСТРОЙКИ (уже под ваш сайт) ============
+  // ============ НАСТРОЙКИ (не менять) ============
   var OWNER  = "poetryname";
   var REPO   = "poetryname.github.io";
-  var FOLDER = ""; // фотографии лежат в корне репозитория
-  var EXCLUDE = ["author.jpg", "fon.png.png", "sea-wall.png"]; // старые картинки сайта — не в альбом
-  // ======================================================
+  var FOLDER = "";
+  var EXCLUDE = ["author.jpg", "fon.png.png", "sea-wall.png"];
+  // ===============================================
 
   var EXTS = ["jpg", "jpeg", "png", "webp", "gif", "avif", "jfif"];
   var album = document.getElementById("album");
 
-  if (!album) {
-    console.warn('album.js: на странице нет элемента <div id="album"></div>');
-    return;
-  }
+  if (!album) return;
 
   var css = [
     ".album-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:16px 0}",
     ".album-thumb{padding:0;border:0;background:none;cursor:zoom-in;border-radius:8px;overflow:hidden;line-height:0}",
-    ".album-thumb img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;display:block;transition:transform .15s}",
+    ".album-thumb img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;display:block;transition:transform .15s;background:#eee}",
     ".album-thumb img:hover{transform:scale(1.04)}",
     ".album-msg{color:#888;padding:12px 0}",
     ".album-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:99999;display:none;align-items:center;justify-content:center}",
@@ -36,6 +33,13 @@
   var st = document.createElement("style");
   st.textContent = css;
   document.head.appendChild(st);
+
+  // Миниатюра через бесплатный сервис сжатия (в 10–50 раз легче оригинала)
+  function thumbUrl(full) {
+    return "https://images.weserv.nl/?url=" +
+           encodeURIComponent(full.replace(/^https?:\/\//, "")) +
+           "&w=400&output=jpg&q=70";
+  }
 
   var api = "https://api.github.com/repos/" + encodeURIComponent(OWNER) +
             "/" + encodeURIComponent(REPO) + "/contents" +
@@ -61,7 +65,7 @@
       renderGrid(photos);
     })
     .catch(function (e) {
-      album.innerHTML = '<p class="album-msg">Не удалось загрузить фотографии. Проверьте настройки в начале album.js.</p>';
+      album.innerHTML = '<p class="album-msg">Не удалось загрузить фотографии.</p>';
       console.error("album.js:", e);
     });
 
@@ -77,7 +81,12 @@
       var img = document.createElement("img");
       img.loading = "lazy";
       img.alt = p.name;
-      img.src = p.url;
+      img.src = thumbUrl(p.url); // в сетке — маленькая копия
+      img.onerror = function () {
+        // если сервис сжатия недоступен — показываем оригинал
+        this.onerror = null;
+        this.src = p.url;
+      };
       b.appendChild(img);
       b.addEventListener("click", function () { open(i); });
       grid.appendChild(b);
@@ -95,12 +104,12 @@
 
     var prev = document.createElement("button");
     prev.className = "album-btn album-prev";
-    prev.innerHTML = "&#8249;"; // назад
+    prev.innerHTML = "&#8249;";
     prev.addEventListener("click", function (e) { e.stopPropagation(); step(-1); });
 
     var next = document.createElement("button");
     next.className = "album-btn album-next";
-    next.innerHTML = "&#8250;"; // дальше
+    next.innerHTML = "&#8250;";
     next.addEventListener("click", function (e) { e.stopPropagation(); step(1); });
 
     var close = document.createElement("button");
@@ -144,9 +153,10 @@
 
   function show() {
     var p = currentPhotos[current];
-    big.src = p.url;
+    big.src = p.url; // в просмотре — полная версия
     counter.textContent = (current + 1) + " / " + currentPhotos.length;
     caption.textContent = p.name;
+    // заранее подгружаем соседние фото, чтобы листать без пауз
     [current + 1, current - 1].forEach(function (n) {
       if (n >= 0 && n < currentPhotos.length) { var im = new Image(); im.src = currentPhotos[n].url; }
     });
